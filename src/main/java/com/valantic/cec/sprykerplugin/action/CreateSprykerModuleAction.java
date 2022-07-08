@@ -26,7 +26,7 @@ public class CreateSprykerModuleAction extends CreateElementActionBase {
     }
 
     @Override
-    protected void invokeDialog(@NotNull Project project, @NotNull PsiDirectory directory, @NotNull Consumer<PsiElement[]> elementsConsumer) {
+    protected void invokeDialog(@NotNull Project project, @NotNull PsiDirectory directory, @NotNull Consumer<? super PsiElement[]> elementsConsumer) {
         this.project = project;
         MyInputValidator validator = new MyInputValidator(project, directory);
         String moduleName = Messages.showInputDialog(

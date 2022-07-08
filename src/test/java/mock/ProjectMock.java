@@ -127,22 +127,22 @@ public class ProjectMock<T> implements Project {
 
     @Override
     public @NotNull RuntimeException createError(@NotNull Throwable error, @NotNull PluginId pluginId) {
-        return null;
+        return new RuntimeException();
     }
 
     @Override
     public @NotNull RuntimeException createError(@NotNull @NonNls String message, @NotNull PluginId pluginId) {
-        return null;
+        return new RuntimeException();
     }
 
     @Override
     public @NotNull RuntimeException createError(@NotNull @NonNls String message, @Nullable Throwable error, @NotNull PluginId pluginId, @Nullable Map<String, String> attachments) {
-        return null;
+        return new RuntimeException();
     }
 
     @Override
     public @NotNull <T> Class<T> loadClass(@NotNull String className, @NotNull PluginDescriptor pluginDescriptor) throws ClassNotFoundException {
-        return null;
+        return (Class<T>) ProjectMock.class.getClassLoader().loadClass(className);
     }
 
     @Override

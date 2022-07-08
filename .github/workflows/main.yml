@@ -1,4 +1,4 @@
-name: 'Build Source'
+name: 'Main'
 
 # **What it does**: Renders the content of every page and check all internal links.
 # **Why we have it**: To make sure all links connect correctly.
@@ -58,3 +58,14 @@ jobs:
         with:
           name: build
           path: build/distributions
+  tests:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+      - name: Run tests
+        run: ./gradlew test

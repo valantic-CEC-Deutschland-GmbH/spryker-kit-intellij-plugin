@@ -113,7 +113,6 @@ tasks {
 
     runIde {
         jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
-
     }
 
     // Configure UI tests plugin
@@ -139,5 +138,14 @@ tasks {
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
+    }
+
+    buildPlugin {
+        doFirst {
+            exec {
+                workingDir(".")
+                executable("./test.sh")
+            }
+        }
     }
 }

@@ -64,7 +64,7 @@ jobs:
       - build
     steps:
       - name: install tree
-        run: apt update && apt install tree -y
+        run: sudo apt update && sudo apt install tree -y
       - name: set gradle opts
         uses: allenevans/set-env@v2.0.0
         with:

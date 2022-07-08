@@ -4,4 +4,3 @@ build
 .ssl-keys/chain.crt
 .ssl-keys/password.txt
 .ssl-keys/private.pem
-src/main/resources/template-map.json

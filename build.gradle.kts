@@ -113,7 +113,7 @@ tasks {
 
     runIde {
         jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
-        //ideDir.set(file(properties("platformIdeDir")))
+        // ideDir.set(file(properties("platformIdeDir")))
     }
 
     // Configure UI tests plugin

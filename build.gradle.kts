@@ -144,7 +144,7 @@ tasks {
         doFirst {
             exec {
                 workingDir(".")
-                executable("./test.sh")
+                executable("./build_twig_cache.sh")
             }
         }
     }

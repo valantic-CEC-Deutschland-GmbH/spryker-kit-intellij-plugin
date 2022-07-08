@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Glue\{{ module }}\Plugin\GlueApplication;
+
+use Generated\Shared\Transfer\RestErrorCollectionTransfer;
+use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\RestRequestValidatorPluginInterface;
+use Spryker\Glue\Kernel\AbstractPlugin;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * @method \{{ organization }}\Glue\{{ module }}\{{ module }}Factory getFactory()
+ */
+class {{ module }}RestRequestValidatorPlugin extends AbstractPlugin implements RestRequestValidatorPluginInterface
+{
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $httpRequest
+     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
+     *
+     * @return \Generated\Shared\Transfer\RestErrorCollectionTransfer|null
+     */
+    public function validate(Request $httpRequest, RestRequestInterface $restRequest): ?RestErrorCollectionTransfer
+    {
+    }
+}

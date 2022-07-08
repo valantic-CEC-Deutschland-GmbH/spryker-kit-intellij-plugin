@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Glue\{{ module }}\Plugin\GlueApplication;
+
+use Spryker\Glue\GlueApplication\Rest\Request\RequestBuilderInterface;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\FormatRequestPluginInterface;
+use Spryker\Glue\Kernel\AbstractPlugin;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * @method \{{ organization }}\Glue\{{ module }}\{{ module }}Factory getFactory()
+ */
+class {{ module }}FormatRequestPlugin extends AbstractPlugin implements FormatRequestPluginInterface
+{
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Spryker\Glue\GlueApplication\Rest\Request\RequestBuilderInterface $requestBuilder
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Spryker\Glue\GlueApplication\Rest\Request\RequestBuilderInterface
+     */
+    public function format(RequestBuilderInterface $requestBuilder, Request $request): RequestBuilderInterface
+    {
+    }
+}

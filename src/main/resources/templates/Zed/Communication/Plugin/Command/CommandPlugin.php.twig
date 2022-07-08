@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }}\Communication\Plugin\Command;
+
+use Spryker\Zed\Kernel\Communication\AbstractPlugin;
+use Spryker\Zed\StateMachine\Dependency\Plugin\CommandPluginInterface;
+
+/**
+ * @method \{{ organization }}\Zed\{{ module }}\Communication\{{ module }}CommunicationFactory getFactory()
+ * @method \{{ organization }}\Zed\{{ module }}\Business\{{ module }}FacadeInterface getFacade()
+ */
+class {{ className }}CommandPlugin  extends AbstractPlugin implements CommandPluginInterface
+{
+}

@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }}\Business;
+
+use Spryker\Zed\Kernel\Business\AbstractFacade;
+
+/**
+ * @method \{{ organization }}\Zed\{{ module }}\Business\{{ module }}BusinessFactory getFactory()
+ */
+class {{ module }}Facade extends AbstractFacade implements {{ module }}FacadeInterface
+{
+    /**
+     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer[] $queueMessageTransfers
+     *
+     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer[]
+     */
+    public function processMessages(array $queueMessageTransfers): array
+    {
+        // return $this->getFactory()->createExampleQueueMessageProcessor()->processMessages($queueMessageTransfers);
+    }
+}

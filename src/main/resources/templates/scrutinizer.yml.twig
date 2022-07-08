@@ -1,0 +1,19 @@
+build:
+    environment:
+        php: '7.4'
+
+    dependencies:
+        before:
+            - 'composer remove --dev spryker/git-hook'
+
+    tests:
+        override:
+            - true
+
+build_failure_conditions:
+    - 'project.metric("scrutinizer.quality", < 9.6)'
+
+checks:
+    php:
+        code_rating: true
+        duplication: true

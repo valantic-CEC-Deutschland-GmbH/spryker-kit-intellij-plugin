@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }}\Business;
+
+interface {{ module }}FacadeInterface
+{
+    /**
+     * @param \Generated\Shared\Transfer\QueueReceiveMessageTransfer[] $queueMessageTransfers
+     *
+     * @return \Generated\Shared\Transfer\QueueReceiveMessageTransfer[]
+     */
+    public function processMessages(array $queueMessageTransfers): array;
+}

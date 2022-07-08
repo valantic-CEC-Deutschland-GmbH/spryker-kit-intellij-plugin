@@ -1,0 +1,179 @@
+{
+   "map" : {
+      "Client" : {
+         "ClientInterface.php.twig" : {},
+         "ClientDependencyProvider.php.twig" : {},
+         "ClientConfig.php.twig" : {},
+         "ClientFactory.php.twig" : {},
+         "Client.php.twig" : {}
+      },
+      "CONTRIBUTING.md.twig" : {},
+      "travis.yml.twig" : {},
+      "Common" : {
+         "InterfaceMethod.php.twig" : {},
+         "Method.php.twig" : {}
+      },
+      "tooling.yml.twig" : {},
+      "Service" : {
+         "ServiceInterface.php.twig" : {},
+         "Service.php.twig" : {},
+         "ServiceDependencyProvider.php.twig" : {},
+         "ServiceFactory.php.twig" : {}
+      },
+      "Yves" : {
+         "YvesDependencyProvider.php.twig" : {},
+         "Dependency" : {
+            "YvesDependencyBridgeMethod.php.twig" : {},
+            "Client" : {
+               "YvesDependencyClientFactoryMethod.php.twig" : {},
+               "YvesDependencyClientInterface.php.twig" : {},
+               "YvesDependencyClientBridge.php.twig" : {},
+               "YvesDependencyClientDependencyProviderMethod.php.twig" : {}
+            },
+            "Service" : {
+               "YvesDependencyServiceFactoryMethod.php.twig" : {},
+               "YvesDependencyServiceDependencyProviderMethod.php.twig" : {},
+               "YvesDependencyServiceInterface.php.twig" : {},
+               "YvesDependencyServiceBridge.php.twig" : {}
+            },
+            "YvesDependencyBridgeInterfaceMethod.php.twig" : {}
+         },
+         "YvesFactory.php.twig" : {},
+         "YvesConfig.php.twig" : {}
+      },
+      "LICENSE.twig" : {},
+      "Glue" : {
+         "Plugin" : {
+            "GlueApplication" : {
+               "FormatRequestPlugin.php.twig" : {},
+               "ValidateHttpRequestPlugin.php.twig" : {},
+               "ControllerAfterActionPlugin.php.twig" : {},
+               "FormatResponseHeadersPlugin.php.twig" : {},
+               "RestRequestValidatorPlugin.php.twig" : {},
+               "GlueResourceRoutePlugin.php.twig" : {},
+               "FormatResponseDataPlugin.php.twig" : {},
+               "GlueResourceRelationshipPlugin.php.twig" : {},
+               "ControllerBeforeActionPlugin.php.twig" : {}
+            }
+         },
+         "Validation" : {
+            "AddGlueValidation.yml.twig" : {}
+         },
+         "GlueRouteResource.php.twig" : {},
+         "GlueResource.php.twig" : {},
+         "GlueResourceInterface.php.twig" : {},
+         "Controller" : {
+            "MethodGetGlueController.php.twig" : {},
+            "MethodPostGlueController.php.twig" : {},
+            "MethodDeleteGlueController.php.twig" : {},
+            "MethodPatchGlueController.php.twig" : {},
+            "GlueController.php.twig" : {}
+         },
+         "Dependency" : {
+            "GlueDependencyBridgeMethod.php.twig" : {},
+            "Client" : {
+               "GlueDependencyClientDependencyProviderMethod.php.twig" : {},
+               "GlueDependencyClientBridge.php.twig" : {},
+               "GlueDependencyClientToDependencyProvider.php.twig" : {},
+               "GlueDependencyClientInterface.php.twig" : {},
+               "GlueDependencyClientFactoryMethod.php.twig" : {}
+            },
+            "GlueDependencyBridgeInterfaceMethod.php.twig" : {}
+         },
+         "GlueFactory.php.twig" : {},
+         "Processor" : {
+            "Mapper" : {
+               "GlueResourceMapperMethod.php.twig" : {},
+               "GlueResourceMapperInterfaceMethod.php.twig" : {}
+            },
+            "GlueProcessorModelInterface.php.twig" : {},
+            "GlueProcessorModel.php.twig" : {}
+         },
+         "GlueDependencyProvider.php.twig" : {},
+         "GlueFactoryMethod.php.twig" : {},
+         "GlueConfig.php.twig" : {}
+      },
+      "gitignore.twig" : {},
+      "phpstan.neon.twig" : {},
+      "scrutinizer.yml.twig" : {},
+      "template-map-v2.json" : {},
+      "gitattributes.twig" : {},
+      "codeception.yml.twig" : {},
+      "Shared" : {
+         "SharedConstantsInterface.php.twig" : {},
+         "transfer.xml.twig" : {}
+      },
+      "CHANGELOG.md.twig" : {},
+      "phpstan.json.twig" : {},
+      "Zed" : {
+         "Dependency" : {
+            "Service" : {
+               "ZedDependencyServiceDependencyProviderMethod.php.twig" : {},
+               "ZedDependencyServiceBridge.php.twig" : {},
+               "ZedDependencyServiceBusinessFactoryMethod.php.twig" : {},
+               "ZedDependencyServiceInterface.php.twig" : {}
+            },
+            "ZedDependencyBridgeMethod.php.twig" : {},
+            "Facade" : {
+               "ZedDependencyFacadeDependencyProviderMethod.php.twig" : {},
+               "ZedDependencyFacadeBusinessFactoryMethod.php.twig" : {},
+               "ZedDependencyFacadeBridge.php.twig" : {},
+               "ZedDependencyFacadeInterface.php.twig" : {}
+            },
+            "ZedDependencyBridgeInterfaceMethod.php.twig" : {},
+            "Client" : {
+               "ZedDependencyClientBusinessFactoryMethod.php.twig" : {},
+               "ZedDependencyClientBridge.php.twig" : {},
+               "ZedDependencyClientInterface.php.twig" : {},
+               "ZedDependencyClientDependencyProviderMethod.php.twig" : {}
+            }
+         },
+         "Business" : {
+            "ZedBusinessFacadeInterface.php.twig" : {},
+            "Model" : {
+               "ZedBusinessModel.php.twig" : {},
+               "ZedBusinessModelInterface.php.twig" : {}
+            },
+            "MethodBusinessFactory.php.twig" : {},
+            "ZedBusinessFactory.php.twig" : {},
+            "ZedBusinessFacadeTest.php.twig" : {},
+            "ZedBusinessTestSuiteCodeceptionConfiguration.yml.twig" : {},
+            "ZedBusinessFacade.php.twig" : {}
+         },
+         "Communication" : {
+            "navigation.xml.twig" : {},
+            "ZedCommunicationConsoleTest.php.twig" : {},
+            "ZedCommunicationFactory.php.twig" : {},
+            "ZedCommunicationTestSuiteCodeceptionConfiguration.yml.twig" : {},
+            "ZedCommunicationController.php.twig" : {},
+            "ZedCommunicationConsole.php.twig" : {},
+            "MethodZedCommunicationController.php.twig" : {}
+         },
+         "ZedDependencyProvider.php.twig" : {},
+         "ZedConfig.php.twig" : {},
+         "Persistence" : {
+            "ZedPersistenceEntityManagerInterface.php.twig" : {},
+            "Propel" : {
+               "Schema" : {
+                  "schema.xml.twig" : {}
+               },
+               "AbstractQuery.php.twig" : {},
+               "AbstractEntity.php.twig" : {}
+            },
+            "ZedPersistenceFactory.php.twig" : {},
+            "ZedPersistenceRepositoryInterface.php.twig" : {},
+            "ZedPersistenceRepository.php.twig" : {},
+            "ZedPersistenceEntityManager.php.twig" : {}
+         },
+         "ZedTestCodeceptionConfiguration.yml.twig" : {},
+         "Presentation" : {
+            "ZedPresentationTwig.twig" : {}
+         }
+      },
+      "editorconfig.twig" : {},
+      "coveralls.yml.twig" : {},
+      "composer.json.twig" : {},
+      "tree2json2.pl" : {},
+      "README.md.twig" : {}
+   }
+}

@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Yves\{{ module }}\Widget;
+
+use Spryker\Yves\Kernel\Widget\AbstractWidget;
+
+/**
+ * @method \{{ organization }}\Yves\{{ module }}\{{ module }}Config getConfig()
+ */
+class {{ module }}Widget extends AbstractWidget
+{
+    public function __construct()
+    {
+    }
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return '{{ module }}';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getTemplate(): string
+    {
+        return '@{{ module }}/views/{{ module | dasherize }}/WidgetViewTwig.twig';
+    }
+}

@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Glue\{{ module }}\Plugin\GlueApplication;
+
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ValidateHttpRequestPluginInterface;
+use Spryker\Glue\Kernel\AbstractPlugin;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * @method \{{ organization }}\Glue\{{ module }}\{{ module }}Factory getFactory()
+ */
+class {{ module }}ValidateHttpRequestPlugin extends AbstractPlugin implements ValidateHttpRequestPluginInterface
+{
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Generated\Shared\Transfer\RestErrorMessageTransfer|null
+     */
+    public function validate(Request $request): ?RestErrorMessageTransfer
+    {
+    }
+}

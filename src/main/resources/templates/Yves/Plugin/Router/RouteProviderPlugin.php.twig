@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Yves\{{ module }}\Plugin\Router;
+
+use Spryker\Yves\Router\Plugin\RouteProvider\AbstractRouteProviderPlugin;
+use Spryker\Yves\Router\Route\RouteCollection;
+
+class {{ module }}RouteProviderPlugin extends AbstractRouteProviderPlugin
+{
+    /**
+     * Specification:
+     * - Adds Routes to the RouteCollection.
+     *
+     * @api
+     *
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    public function addRoutes(RouteCollection $routeCollection): RouteCollection
+    {
+        return $routeCollection;
+    }
+}

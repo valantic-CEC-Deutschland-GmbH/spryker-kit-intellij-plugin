@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }};
+
+use Spryker\Zed\Kernel\AbstractBundleConfig;
+use Pyz\Shared\{{ module }}\{{ module }}Constants;
+
+class {{ module }}Config extends AbstractBundleConfig
+{
+    /**
+     * @return int
+     */
+    public function getExampleQueueChunkSize(): int
+    {
+        return $this->get({{ module }}Constants::EXAMPLE_QUEUE_CHUNK_SIZE, 500);
+    }
+}

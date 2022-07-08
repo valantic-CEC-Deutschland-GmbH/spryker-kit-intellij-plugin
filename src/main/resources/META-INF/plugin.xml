@@ -1,0 +1,57 @@
+<idea-plugin>
+    <id>com.valantic.cec.intellijsprykerplugin</id>
+    <name>SprykerKit</name>
+    <vendor>valantic CEC Deutschland GmbH</vendor>
+
+    <!-- Product and plugin compatibility requirements -->
+    <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.jetbrains.php</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <projectService serviceImplementation="com.valantic.cec.sprykerplugin.command.CreateMethodCommand"/>
+        <projectService serviceInterface="com.valantic.cec.sprykerplugin.services.PhpClassStringGeneratorInterface"
+                        serviceImplementation="com.valantic.cec.sprykerplugin.services.PhpClassStringGenerator" />
+        <projectService serviceInterface="com.valantic.cec.sprykerplugin.services.ContextBuilderInterface"
+                        serviceImplementation="com.valantic.cec.sprykerplugin.services.ContextBuilder" />
+        <projectService serviceImplementation="com.valantic.cec.sprykerplugin.services.FileWriter"
+                        serviceInterface="com.valantic.cec.sprykerplugin.services.FileWriterInterface" />
+        <projectService serviceInterface="com.valantic.cec.sprykerplugin.services.TwigResourcesInterface"
+                        serviceImplementation="com.valantic.cec.sprykerplugin.services.TwigResources" />
+        <projectService serviceInterface="com.valantic.cec.sprykerplugin.services.FileNameGeneratorInterface"
+                        serviceImplementation="com.valantic.cec.sprykerplugin.services.FileNameGenerator" />
+
+        <projectService serviceImplementation="com.valantic.cec.sprykerplugin.services.ProjectSettingsState" />
+
+        <applicationService serviceImplementation="com.valantic.cec.sprykerplugin.services.ApplicationSettingsState"/>
+        <intentionAction>
+            <className>com.valantic.cec.sprykerplugin.action.CreateMethodFromTemplateIntentionAction</className>
+            <category>PHP</category>
+            <descriptionDirectoryName>CreateMethodFromTemplateIntentionAction</descriptionDirectoryName>
+        </intentionAction>
+        <intentionAction>
+            <className>com.valantic.cec.sprykerplugin.action.CreateMissingFactoryMethodsIntentionAction</className>
+            <category>PHP</category>
+            <descriptionDirectoryName>CreateMissingFactoryMethodsIntentionAction</descriptionDirectoryName>
+        </intentionAction>
+    </extensions>
+
+    <actions>
+        <group id="org.intellij.sdk.action.DynamicActionGroup"
+               text="SprykerKit" popup="true"
+               class="com.valantic.cec.sprykerplugin.action.newGroup.SprykerDynamicActionGroup"
+                icon="com.valantic.cec.sprykerplugin.icons.ValanticIcons.Sdk_default_icon" >
+            <add-to-group group-id="NewGroup" />
+        </group>
+    </actions>
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable parentId="tools" instance="com.valantic.cec.sprykerplugin.config.ApplicationSettingsConfigurable"
+                                 id="com.valantic.cec.sprykerplugin.config.ApplicationSettingsConfigurable" displayName="SprykerKit Settings"
+                                 nonDefaultProject="true"/>
+        <projectConfigurable parentId="tools" instance="com.valantic.cec.sprykerplugin.config.ProjectSettingsConfigurable"
+                             id="com.valantic.cec.sprykerplugin.config.ProjectSettingsConfigurable" displayName="SprykerKit Project Settings"
+                             nonDefaultProject="true" />
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }}\Communication\Controller;
+
+use Generated\Shared\Transfer\{{ module }}Transfer;
+use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
+
+/**
+ * @method \{{ organization }}\Zed\{{ module }}\Communication\{{ module }}CommunicationFactory getFactory()
+ * @method \{{ organization }}\Zed\{{ module }}\Business\{{ module }}FacadeInterface getFacade()
+ */
+class GatewayController extends AbstractGatewayController
+{
+    /**
+     * @param \Generated\Shared\Transfer\{{ module }}Transfer ${{ module | lcfirst }}Transfer
+     *
+     * @return \Generated\Shared\Transfer\{{ module }}Transfer ${{ module | lcfirst }}Transfer
+     */
+    public function customAction({{ module }}Transfer ${{ module | lcfirst }}Transfer): {{ module }}Transfer
+    {
+        return $this->getFacade()
+                ->customAction(${{ module | lcfirst }}Transfer);
+    }
+}

@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }}\Business\Reader;
+
+use Generated\Shared\Transfer\{{ module }}CollectionTransfer;
+use Generated\Shared\Transfer\{{ module }}CriteriaTransfer;
+use {{ organization }}\Zed\{{ module }}\Persistence\{{ module }}RepositoryInterface;
+
+class {{ className | classNameShort }}Reader implements {{ className | classNameShort }}ReaderInterface
+{
+    /**
+     * @param \{{ organization }}\Zed\{{ module }}\Persistence\{{ module }}RepositoryInterface ${{ module | lcfirst }}Repository
+     */
+    public function __construct({{ module }}RepositoryInterface ${{ module | lcfirst }}Repository)
+    {
+        $this->{{ module | lcfirst }}Repository = ${{ module | lcfirst }}Repository;
+    }
+
+    /**
+    * @param \Generated\Shared\Transfer\{{ module }}CriteriaTransfer ${{ module | lcfirst }}CriteriaTransfer
+    *
+    * @return \Generated\Shared\Transfer\{{ module }}CollectionTransfer
+    */
+    public function find{{ module }}({{ module }}CriteriaTransfer ${{ module | lcfirst }}CriteriaTransfer): {{ module }}CollectionTransfer
+    {
+        // ToDo: Implementation
+        // $this->{{ module | lcfirst }}Repository->find{{ module }}(${{ module | lcfirst }}CriteriaTransfer);
+    }
+}

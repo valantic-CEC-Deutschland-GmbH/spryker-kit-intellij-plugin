@@ -1,0 +1,64 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Glue\{{ module }}\Plugin\GlueApplication;
+
+use Generated\Shared\Transfer\Rest{{ module | dashToCamelCase }}AttributesTransfer;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface;
+use Spryker\Glue\Kernel\AbstractPlugin;
+
+class {{ module | dashToCamelCase }}ResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
+{
+    /**
+     * {@inheritdoc}
+     * - Configures available actions for {{ module | dasherize }} resource.
+     *
+     * @api
+     *
+     * @param \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface $resourceRouteCollection
+     *
+     * @return \Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface
+     */
+    public function configure(ResourceRouteCollectionInterface $resourceRouteCollection): ResourceRouteCollectionInterface
+    {
+        return $resourceRouteCollection;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getResourceType(): string
+    {
+        return \{{ organization }}\Glue\{{ module }}\{{ module }}Config::RESOURCE_{{ module | dashToUnderscore | upper }};
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getController(): string
+    {
+        return '{{ module | dasherize }}-resource';
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getResourceAttributesClassName(): string
+    {
+        return Rest{{ module }}AttributesTransfer::class;
+    }
+}

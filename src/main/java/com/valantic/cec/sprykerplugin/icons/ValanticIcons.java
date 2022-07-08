@@ -4,13 +4,11 @@ package com.valantic.cec.sprykerplugin.icons;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.IconLoader;
-import com.valantic.cec.sprykerplugin.resources.FileResource;
 
 import javax.swing.*;
 
 public class ValanticIcons {
     public static final Icon Sdk_default_icon = IconLoader.findIcon("/3360-16x16.png", ValanticIcons.class.getClassLoader());
-
     public static final Icon folderIcon = AllIcons.Actions.NewFolder;
     public static final Icon moduleIcon = AllIcons.Actions.ModuleDirectory;
     public static final Icon fileIcon = AllIcons.Actions.AddFile;

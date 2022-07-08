@@ -17,8 +17,8 @@ plugins {
     // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
     id("io.gitlab.arturbosch.detekt") version "1.14.2"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
-    //id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
-//    id("com.x5dev.chunk.templates") version "3.5.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    // id("com.x5dev.chunk.templates") version "3.5.0"
 }
 
 group = properties("pluginGroup")
@@ -92,28 +92,30 @@ tasks {
 
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         pluginDescription.set(
-                projectDir.resolve("README.md").readText().lines().run {
-                    val start = "<!-- Plugin description -->"
-                    val end = "<!-- Plugin description end -->"
+            projectDir.resolve("README.md").readText().lines().run {
+                val start = "<!-- Plugin description -->"
+                val end = "<!-- Plugin description end -->"
 
-                    if (!containsAll(listOf(start, end))) {
-                        throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
-                    }
-                    subList(indexOf(start) + 1, indexOf(end))
-                }.joinToString("\n").run { markdownToHTML(this) }
+                if (!containsAll(listOf(start, end))) {
+                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                }
+                subList(indexOf(start) + 1, indexOf(end))
+            }.joinToString("\n").run { markdownToHTML(this) }
         )
 
         // Get the latest available change notes from the changelog file
-        changeNotes.set(provider {
-            changelog.run {
-                getOrNull(properties("pluginVersion")) ?: getLatest()
-            }.toHTML()
-        })
+        changeNotes.set(
+            provider {
+                changelog.run {
+                    getOrNull(properties("pluginVersion")) ?: getLatest()
+                }.toHTML()
+            }
+        )
     }
 
     runIde {
         jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
-        //ideDir.set(file(properties("platformIdeDir")))
+        ideDir.set(file(properties("platformIdeDir")))
     }
 
     // Configure UI tests plugin

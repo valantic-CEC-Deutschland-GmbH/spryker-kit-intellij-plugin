@@ -53,9 +53,5 @@ jobs:
         env:
           FILE_NAME: ".ssl-keys/password.txt"
           FILE_DATA: $PASSWORD_TXT
-      - name: Download build artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build
       - name: Run tests
         run: ./gradlew test

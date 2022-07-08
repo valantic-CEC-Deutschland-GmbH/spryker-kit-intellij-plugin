@@ -8,9 +8,7 @@ import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 public class ValanticIcons {
-
-    public static final Icon Sdk_default_icon = IconLoader.findIcon("/3360-16x16.png");
-
+    public static final Icon Sdk_default_icon = IconLoader.findIcon("/3360-16x16.png", ValanticIcons.class.getClassLoader());
     public static final Icon folderIcon = AllIcons.Actions.NewFolder;
     public static final Icon moduleIcon = AllIcons.Actions.ModuleDirectory;
     public static final Icon fileIcon = AllIcons.Actions.AddFile;

@@ -50,6 +50,7 @@ intellij {
     version.set(properties("platformVersion"))
     type.set(properties("platformType"))
 
+    //localPath.set("/home/patrickjaja/.local/share/JetBrains/Toolbox/apps/PhpStorm/ch-0/213.6777.58")
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
 }

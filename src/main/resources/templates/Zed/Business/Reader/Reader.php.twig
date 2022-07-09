@@ -10,6 +10,8 @@ use {{ organization }}\Zed\{{ module }}\Persistence\{{ module }}RepositoryInterf
 
 class {{ className | classNameShort }}Reader implements {{ className | classNameShort }}ReaderInterface
 {
+    private {{ module }}RepositoryInterface ${{ module | lcfirst }}Repository;
+
     /**
      * @param \{{ organization }}\Zed\{{ module }}\Persistence\{{ module }}RepositoryInterface ${{ module | lcfirst }}Repository
      */

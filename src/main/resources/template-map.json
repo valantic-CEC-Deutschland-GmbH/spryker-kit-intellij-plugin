@@ -48,6 +48,7 @@
         {"type":"file","name":"transfer.xml.twig"}
     ]}
   ]},
+    {"type":"file","name":"tooling.yml.twig"},
     {"type":"directory","name":"Yves","contents":[
       {"type":"file","name":"Config.php.twig"},
       {"type":"directory","name":"Controller","contents":[

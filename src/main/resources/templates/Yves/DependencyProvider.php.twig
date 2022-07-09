@@ -8,4 +8,15 @@ use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 
 class {{ module }}DependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    public function provideDependencies(Container $container): Container
+    {
+        $container = parent::provideDependencies($container);
+
+        return $container;
+    }
 }

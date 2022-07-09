@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace {{ organization }}\Zed\{{ module }}\Business\Writer;
+
+use {{ organization }}\Zed\{{ module }}\Persistence\{{ module }}EntityManagerInterface;
+
+class {{ className | classNameShort }}Writer implements {{ className | classNameShort }}WriterInterface
+{
+    private {{ module }}EntityManagerInterface ${{ module | lcfirst }}EntityManager;
+
+    /**
+     * @param \{{ organization }}\Zed\{{ module }}\Persistence\{{ module }}EntityManagerInterface ${{ module | lcfirst }}EntityManager
+     */
+    public function __construct({{ module }}EntityManagerInterface ${{ module | lcfirst }}EntityManager)
+    {
+        $this->{{ module | lcfirst }}EntityManager = ${{ module | lcfirst }}EntityManager;
+}
+}

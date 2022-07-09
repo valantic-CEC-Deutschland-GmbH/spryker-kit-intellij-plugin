@@ -1,20 +1,14 @@
 [
   {"type":"directory","name":"templates/","contents":[
     {"type":"file","name":"CHANGELOG.md.twig"},
-    {"type":"file","name":"ci.yml.twig"},
+    {"type":"file","name":"CONTRIBUTING.md.twig"},
     {"type":"directory","name":"Client","contents":[
-      {"type":"file","name":"ClientInterface.php.twig"},
       {"type":"file","name":"Client.php.twig"},
+      {"type":"file","name":"ClientInterface.php.twig"},
       {"type":"file","name":"Config.php.twig"},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"file","name":"Factory.php.twig"}
   ]},
-    {"type":"file","name":"codeception.yml.twig"},
-    {"type":"file","name":"composer.json.twig"},
-    {"type":"file","name":"CONTRIBUTING.md.twig"},
-    {"type":"file","name":"editorconfig.twig"},
-    {"type":"file","name":"gitattributes.twig"},
-    {"type":"file","name":"gitignore.twig"},
     {"type":"directory","name":"Glue","contents":[
       {"type":"file","name":"Config.php.twig"},
       {"type":"directory","name":"Controller","contents":[
@@ -40,15 +34,13 @@
     ]}
   ]},
     {"type":"file","name":"LICENSE.twig"},
-    {"type":"file","name":"phpstan.neon.twig"},
     {"type":"file","name":"README.md.twig"},
-    {"type":"file","name":"scrutinizer.yml.twig"},
     {"type":"directory","name":"Service","contents":[
       {"type":"file","name":"Config.php.twig"},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"file","name":"Factory.php.twig"},
-      {"type":"file","name":"ServiceInterface.php.twig"},
-      {"type":"file","name":"Service.php.twig"}
+      {"type":"file","name":"Service.php.twig"},
+      {"type":"file","name":"ServiceInterface.php.twig"}
   ]},
     {"type":"directory","name":"Shared","contents":[
       {"type":"file","name":"Constants.php.twig"},
@@ -83,15 +75,23 @@
         {"type":"directory","name":"Exception","contents":[
           {"type":"file","name":"$CustomException.php.twig"}
       ]},
-        {"type":"file","name":"FacadeInterface.php.twig"},
         {"type":"file","name":"Facade.php.twig"},
+        {"type":"file","name":"FacadeInterface.php.twig"},
+        {"type":"directory","name":"Mapper","contents":[
+          {"type":"file","name":"Mapper.php.twig"},
+          {"type":"file","name":"MapperInterface.php.twig"}
+      ]},
         {"type":"directory","name":"Model","contents":[
-          {"type":"file","name":"$CustomBusinessModelInterface.php.twig"},
-          {"type":"file","name":"$CustomBusinessModel.php.twig"}
+          {"type":"file","name":"$CustomBusinessModel.php.twig"},
+          {"type":"file","name":"$CustomBusinessModelInterface.php.twig"}
       ]},
         {"type":"directory","name":"Reader","contents":[
-          {"type":"file","name":"ReaderInterface.php.twig"},
-          {"type":"file","name":"Reader.php.twig"}
+          {"type":"file","name":"Reader.php.twig"},
+          {"type":"file","name":"ReaderInterface.php.twig"}
+      ]},
+        {"type":"directory","name":"Writer","contents":[
+          {"type":"file","name":"Writer.php.twig"},
+          {"type":"file","name":"WriterInterface.php.twig"}
       ]}
     ]},
       {"type":"directory","name":"Communication","contents":[
@@ -105,7 +105,6 @@
           {"type":"file","name":"$IndexController.php.twig"},
           {"type":"file","name":"$ViewController.php.twig"}
       ]},
-        {"type":"file","name":"navigation.xml.twig"},
         {"type":"directory","name":"Plugin","contents":[
           {"type":"directory","name":"Command","contents":[
             {"type":"file","name":"CommandPlugin.php.twig"}
@@ -114,27 +113,41 @@
             {"type":"file","name":"QueueMessageProcessorPlugin.php.twig"},
             {"type":"file","name":"QueueMessageRetryProcessorPlugin.php.twig"}
         ]}
-      ]}
+      ]},
+        {"type":"file","name":"navigation.xml.twig"}
     ]},
       {"type":"file","name":"Config.php.twig"},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"directory","name":"Persistence","contents":[
-        {"type":"file","name":"EntityManagerInterface.php.twig"},
         {"type":"file","name":"EntityManager.php.twig"},
+        {"type":"file","name":"EntityManagerInterface.php.twig"},
+        {"type":"directory","name":"Mapper","contents":[
+          {"type":"file","name":"Mapper.php.twig"},
+          {"type":"file","name":"MapperInterface.php.twig"}
+      ]},
         {"type":"file","name":"PersistenceFactory.php.twig"},
         {"type":"directory","name":"Propel","contents":[
           {"type":"directory","name":"Schema","contents":[
             {"type":"file","name":"schema.xml.twig"}
         ]}
       ]},
-        {"type":"file","name":"RepositoryInterface.php.twig"},
-        {"type":"file","name":"Repository.php.twig"}
+        {"type":"file","name":"Repository.php.twig"},
+        {"type":"file","name":"RepositoryInterface.php.twig"}
     ]},
       {"type":"directory","name":"Presentation","contents":[
         {"type":"file","name":"index.twig"}
     ]}
-  ]}
+  ]},
+    {"type":"file","name":"ci.yml.twig"},
+    {"type":"file","name":"codeception.yml.twig"},
+    {"type":"file","name":"composer.json.twig"},
+    {"type":"file","name":"editorconfig.twig"},
+    {"type":"file","name":"gitattributes.twig"},
+    {"type":"file","name":"gitignore.twig"},
+    {"type":"file","name":"phpstan.neon.twig"},
+    {"type":"file","name":"scrutinizer.yml.twig"},
+    {"type":"file","name":"tooling.yml.twig"}
   ]}
 ,
-  {"type":"report","directories":30,"files":74}
+  {"type":"report","directories":33,"files":80}
 ]

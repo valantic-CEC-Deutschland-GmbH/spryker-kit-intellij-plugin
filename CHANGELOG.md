@@ -1,6 +1,12 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.6] - 2022.07.09
+### Added
+- OpenSource SprykerKIT, Contribute templates on https://github.com/nexusunited/spryker-kit-intellij-plugin/tree/main/src/main/resources/templates
+- Added Writer, Mapper, fixed some bugs in templates
+- Refactored Code, Fixed Deprecation
+
 ## [1.0.5] - 2022.05.19
 ### Added
 - Added PHPStorm 2022.2 compatibility

@@ -66,4 +66,4 @@ jobs:
         with:
           tag: ${{ steps.tag.outputs.VERSION }}
           name: Release ${{ steps.tag.outputs.VERSION }}
-          body: ${{ cat CHANGELOG.md }}
+          body: cat CHANGELOG.md

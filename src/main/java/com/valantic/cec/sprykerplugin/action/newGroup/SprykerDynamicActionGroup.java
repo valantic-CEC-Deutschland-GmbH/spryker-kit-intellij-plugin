@@ -13,7 +13,6 @@ public class SprykerDynamicActionGroup extends ActionGroup {
     @NotNull
     @Override
     public AnAction @NotNull [] getChildren(AnActionEvent event) {
-
         ContextBuilderInterface builder = new ContextBuilder(event.getProject());
 
         Context context = builder.createContextFromAnActionEvent(event);
@@ -37,7 +36,6 @@ public class SprykerDynamicActionGroup extends ActionGroup {
 
     @Override
     public void update(AnActionEvent e) {
-
         e.getPresentation().setEnabledAndVisible(true);
     }
 }

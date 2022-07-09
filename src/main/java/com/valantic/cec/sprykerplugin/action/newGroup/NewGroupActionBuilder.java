@@ -49,26 +49,31 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
                     new CreateFileFromTemplateAction("No class to generate", false)
             };
         }
-        AnAction[] fik;
+        return getContextMenuAction(context, resourcesMap);
+    }
+
+    @NotNull
+    private AnAction[] getContextMenuAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
+        AnAction[] menuAction;
         if(context.getClassName() != null) {
-            fik = getCreateMethodActions(context, resourcesMap);
+            menuAction = getCreateMethodActions(context, resourcesMap);
         } else if (context.getModuleName() != null) {
             AnAction[] fileActions = getCreateFileActions(context, resourcesMap);
             AnAction[] dirActions = getCreateDirectoryActions(context, resourcesMap);
-            fik = Arrays.copyOf(fileActions, fileActions.length + dirActions.length);
-            System.arraycopy(dirActions, 0, fik, fileActions.length, dirActions.length);
+            menuAction = Arrays.copyOf(fileActions, fileActions.length + dirActions.length);
+            System.arraycopy(dirActions, 0, menuAction, fileActions.length, dirActions.length);
         } else {
-            fik = getCreateBundleAction(context, resourcesMap);
+            menuAction = getCreateBundleAction(context, resourcesMap);
         }
 
-        return fik;
+        return menuAction;
     }
 
     private AnAction[] getCreateDirectoryActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
         ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
         ArrayList<CreateDirectoryAction> actions = new ArrayList<>();
 
-        AnAction[] fik = new AnAction[0];
+        AnAction[] menuAction = new AnAction[0];
 
         int i = 0;
         for (TwigTreeNode twigTreeNode : twigTreeNodes) {
@@ -82,8 +87,8 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
                 );
             }
         }
-        fik = actions.toArray(fik);
-        return fik;
+        menuAction = actions.toArray(menuAction);
+        return menuAction;
     }
 
     private AnAction[] getCreateBundleAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
@@ -96,19 +101,19 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         ArrayList<TwigTreeNode> methodTemplates = resourcesMap.getValue();
 
         int length = methodTemplates.size();
-        AnAction[] fik = new AnAction[length];
+        AnAction[] menuAction = new AnAction[length];
 
         int i = 0;
         for (TwigTreeNode templateNode : methodTemplates )
         {
             String resultMethodName = templateNode.getName().replace(".twig","")
                     .replace(context.getApplicationName(), "");
-            fik[i++] = new CreateMethodFromTemplateAction("Create " + resultMethodName,
+            menuAction[i++] = new CreateMethodFromTemplateAction("Create " + resultMethodName,
                     context,
                     templateNode.getName(),
                     true);
         }
-        return fik;
+        return menuAction;
     }
 
     @NotNull
@@ -116,7 +121,7 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
         ArrayList<CreateFileFromTemplateAction> actions = new ArrayList<>();
 
-        AnAction[] fik = new AnAction[0];
+        AnAction[] menuAction = new AnAction[0];
 
         int i = 0;
         for (TwigTreeNode twigTreeNode : twigTreeNodes)
@@ -138,8 +143,8 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
                     true)
             );
         }
-        fik = actions.toArray(fik);
-        return fik;
+        menuAction = actions.toArray(menuAction);
+        return menuAction;
     }
 
 }

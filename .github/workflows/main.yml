@@ -58,6 +58,10 @@ jobs:
           FILE_NAME: ".ssl-keys/password.txt"
           FILE_DATA: $PASSWORD_TXT
 
+      - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 7.4
+
       - name: Build with Gradle
         run: ./gradlew --build-cache clean buildPlugin
 
@@ -66,10 +70,6 @@ jobs:
         with:
           name: build
           path: build/distributions
-
-      - uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 7.4
 
       - name: upload gradle artifacts
         uses: actions/upload-artifact@v3

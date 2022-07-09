@@ -12,6 +12,10 @@ jobs:
       - name: install tree
         run: sudo apt update && sudo apt install tree -y
 
+      - name: Get tag name
+        id: tag
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - uses: actions/checkout@v3
 
       - name: set gradle opts
@@ -56,3 +60,10 @@ jobs:
 
       - name: deploy plugin to marketplace
         run: ./gradlew publishPlugin
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag.outputs.VERSION }}
+          name: Release ${{ steps.tag.outputs.VERSION }}
+          body: ${{ cat CHANGELOG.md }}

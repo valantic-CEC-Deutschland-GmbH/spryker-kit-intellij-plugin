@@ -62,7 +62,7 @@ jobs:
         run: ./build_twig_cache.sh
 
       - name: build plugin deploy
-        run: ./gradlew buildPlugin
+        run: ./gradlew --build-cache clean buildPlugin
 
       - name: deploy plugin to marketplace
         run: ./gradlew publishPlugin

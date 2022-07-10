@@ -23,6 +23,7 @@ jobs:
         with:
           GRADLE_OPTS: '-Dorg.gradle.daemon=false'
           ORG_GRADLE_PROJECT_intellijPublishToken: $PUBLISH_TOKEN
+          PUBLISH_TOKEN: $PUBLISH_TOKEN
 
       - name: set gradle user home
         run: export GRADLE_USER_HOME=`pwd`/.gradle

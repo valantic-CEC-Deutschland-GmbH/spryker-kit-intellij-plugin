@@ -54,6 +54,8 @@ jobs:
           FILE_NAME: ".ssl-keys/password.txt"
           FILE_DATA: $PASSWORD_TXT
 
+      - run: ls -lash ./
+
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 7.4

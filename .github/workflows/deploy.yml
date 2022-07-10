@@ -56,6 +56,9 @@ jobs:
         with:
           gradle-version: 7.4
 
+      - name: build twig cache
+        run: ./build_twig_cache.sh
+
       - name: build plugin deploy
         run: ./gradlew buildPlugin
 

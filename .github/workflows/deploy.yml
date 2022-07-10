@@ -22,8 +22,10 @@ jobs:
         uses: allenevans/set-env@v2.0.0
         with:
           GRADLE_OPTS: '-Dorg.gradle.daemon=false'
-          ORG_GRADLE_PROJECT_intellijPublishToken: $PUBLISH_TOKEN
-          PUBLISH_TOKEN: $PUBLISH_TOKEN
+
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
 
       - name: set gradle user home
         run: export GRADLE_USER_HOME=`pwd`/.gradle

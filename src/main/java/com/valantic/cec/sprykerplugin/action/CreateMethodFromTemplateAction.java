@@ -127,7 +127,6 @@ public class CreateMethodFromTemplateAction extends AbstractFromTemplateAction {
                             if(psiFile.isWritable())
                             {
 
-                                assert phpClass != null;
                                 PsiElement method = PhpCodeUtil.createMethodFromTemplate(phpClass, proj, finalMethodString);
                                 if (method == null) {
                                     return;
@@ -152,8 +151,8 @@ public class CreateMethodFromTemplateAction extends AbstractFromTemplateAction {
 
     private int getMethodInsertPosition(PhpClass phpClass) {
         int insertPos = -1;
-
         int methodEndPos = -1;
+
         PsiElement method = PsiTreeUtil.findChildOfType(phpClass, Method.class);
         if (method != null) {
             methodEndPos = method.getTextRange().getEndOffset();

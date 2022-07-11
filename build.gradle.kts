@@ -129,9 +129,23 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set(File(".ssl-keys/chain.crt").readText(Charsets.UTF_8))
-        privateKey.set(File(".ssl-keys/private.pem").readText(Charsets.UTF_8))
-        password.set(File(".ssl-keys/password.txt").readText(Charsets.UTF_8))
+        if (System.getenv("CHAIN_CERT").isNullOrEmpty()) {
+            certificateChain.set(File(".ssl-keys/chain.crt").readText(Charsets.UTF_8))
+        } else {
+            certificateChain.set(System.getenv("CHAIN_CERT"))
+        }
+
+        if (System.getenv("PRIVATE_PEM").isNullOrEmpty()) {
+            certificateChain.set(File(".ssl-keys/private.pem").readText(Charsets.UTF_8))
+        } else {
+            certificateChain.set(System.getenv("PRIVATE_PEM"))
+        }
+
+        if (System.getenv("PASSWORD_TXT").isNullOrEmpty()) {
+            certificateChain.set(File(".ssl-keys/password.txt").readText(Charsets.UTF_8))
+        } else {
+            certificateChain.set(System.getenv("PASSWORD_TXT"))
+        }
     }
 
     publishPlugin {

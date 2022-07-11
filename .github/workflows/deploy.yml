@@ -39,7 +39,7 @@ jobs:
         run: ./gradlew --build-cache clean buildPlugin
 
       - name: deploy plugin to marketplace
-        run: ./gradlew publishPlugin --debug
+        run: ./gradlew publishPlugin
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1

@@ -9,8 +9,8 @@ jobs:
   build-tags:
     runs-on: ubuntu-latest
     steps:
-      - name: install tree
-        run: sudo apt update && sudo apt install tree -y
+      - name: install tree zip
+        run: sudo apt update && sudo apt install tree zip -y
 
       - name: Get tag name
         id: tag

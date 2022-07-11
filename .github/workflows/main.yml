@@ -15,6 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: install tree
+        run: sudo apt update && sudo apt install tree -y
+
       - uses: actions/checkout@v3
 
       - uses: oNaiPs/secrets-to-env-action@v1
@@ -78,6 +81,9 @@ jobs:
     needs:
       - build
     steps:
+      - name: install tree
+        run: sudo apt update && sudo apt install tree -y
+
       - uses: actions/checkout@v3
 
       - uses: oNaiPs/secrets-to-env-action@v1
@@ -110,6 +116,9 @@ jobs:
     needs:
       - build
     steps:
+      - name: install tree
+        run: sudo apt update && sudo apt install tree -y
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -124,7 +133,9 @@ jobs:
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2022.1.1
         with:
-          args: "--yaml-name qodana.yml"
+          args: "--yaml-name 'qodana.yml'"
+          cache-dir: "./.qodana"
+          results-dir: "./build/reports/inspections"
 
       - name: Upload scan result
         uses: github/codeql-action/upload-sarif@v2
@@ -136,6 +147,9 @@ jobs:
     needs:
       - build
     steps:
+      - name: install tree
+        run: sudo apt update && sudo apt install tree -y
+
       - uses: actions/checkout@v3
 
       - uses: oNaiPs/secrets-to-env-action@v1

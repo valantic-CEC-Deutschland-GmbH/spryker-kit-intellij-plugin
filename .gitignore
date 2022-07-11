@@ -1,6 +1,7 @@
 .gradle
 .idea
 build
+.qodana
 .ssl-keys/chain.crt
 .ssl-keys/password.txt
 .ssl-keys/private.pem

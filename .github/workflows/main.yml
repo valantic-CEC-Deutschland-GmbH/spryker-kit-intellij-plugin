@@ -41,7 +41,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: "build/*"
+          path: |
+            build/*
+            !build/tmp
+            !build/idea-sandbox
+            !build/searchableOptions
 
   tests:
     runs-on: ubuntu-latest
@@ -133,9 +137,8 @@ jobs:
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2022.1.1
         with:
-          args: "--yaml-name 'qodana.yml'"
-          cache-dir: "./.qodana"
-          results-dir: "./build/reports/inspections"
+          cache-dir: ".qodana"
+          results-dir: "build/reports/inspections"
 
       - name: Upload scan result
         uses: github/codeql-action/upload-sarif@v2

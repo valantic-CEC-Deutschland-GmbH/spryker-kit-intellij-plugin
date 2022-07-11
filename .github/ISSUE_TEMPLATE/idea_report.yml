@@ -1,0 +1,28 @@
+name: Idea Report
+description: File a Idea report
+title: "[Idea]: "
+labels: ["new"]
+assignees:
+  - patrickjaja
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What is your Idea to add to this Plugin? If you have an Issue, please use the bug_report Issue-template.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is needed?
+      description: Why you think this is needed and how important is this to all users.
+    validations:
+      required: false
+  - type: textarea
+    id: extras
+    attributes:
+      label: Extra Details
+      description: If you want to specify more details or give examples or references, you can do it here.
+    validations:
+      required: false

@@ -118,8 +118,13 @@ jobs:
         with:
           secrets: ${{ toJSON(secrets) }}
 
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2022.1.1
+        with:
+          args: "--yaml-name qodana.yml"
 
       - name: Upload scan result
         uses: github/codeql-action/upload-sarif@v2

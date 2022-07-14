@@ -36,7 +36,7 @@ public class CreateFileFromTemplateAction extends AbstractFromTemplateAction {
     }
 
     @Override
-    public void actionPerformed(AnActionEvent e)
+    public void actionPerformed(@NotNull AnActionEvent e)
     {
 
         final IdeView view = getIdeView(e);

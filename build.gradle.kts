@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.13.1")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
     implementation("com.jayway.jsonpath:json-path:2.7.0") {
         exclude("org.slf4j", "slf4j-api")
@@ -41,7 +41,7 @@ dependencies {
     implementation("io.pebbletemplates:pebble:3.1.5") {
         exclude("org.slf4j", "slf4j-api")
     }
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -126,6 +126,10 @@ tasks {
         systemProperty("jb.privacy.policy.text", "<!--999.999-->")
         systemProperty("jb.consents.confirmation.enabled", "false")
         jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
+    }
+
+    runIdePerformanceTest {
+        testDataDir.set(projectDir.resolve("src/test").canonicalPath)
     }
 
     signPlugin {

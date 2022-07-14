@@ -27,6 +27,10 @@ public class ApplicationSettingsConfigurable implements Configurable {
     @Override
     public @Nullable JComponent createComponent() {
         ApplicationSettingsState settings = ApplicationSettingsState.getInstance();
+        if (settings == null) {
+            throw new RuntimeException("Settings isn't accessible.");
+        }
+
         applicationSettingsComponent = new ApplicationSettingsComponent();
         applicationSettingsComponent.setProjectNamespaceTextText(settings.projectNamespace);
         return applicationSettingsComponent.getPanel();
@@ -35,18 +39,30 @@ public class ApplicationSettingsConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         ApplicationSettingsState settings = ApplicationSettingsState.getInstance();
+        if (settings == null) {
+            throw new RuntimeException("Settings isn't accessible.");
+        }
+
         return !applicationSettingsComponent.getProjectNamespaceText().equals(settings.projectNamespace);
     }
 
     @Override
     public void apply() {
         ApplicationSettingsState settings = ApplicationSettingsState.getInstance();
+        if (settings == null) {
+            throw new RuntimeException("Settings isn't accessible.");
+        }
+
         settings.projectNamespace = applicationSettingsComponent.getProjectNamespaceText();
     }
 
     @Override
     public void reset() {
         ApplicationSettingsState settings = ApplicationSettingsState.getInstance();
+        if (settings == null) {
+            throw new RuntimeException("Settings isn't accessible.");
+        }
+
         applicationSettingsComponent.setProjectNamespaceTextText(settings.projectNamespace);
     }
 

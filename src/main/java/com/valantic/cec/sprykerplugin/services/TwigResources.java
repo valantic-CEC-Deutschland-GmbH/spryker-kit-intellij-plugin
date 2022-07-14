@@ -21,8 +21,7 @@ public class TwigResources implements TwigResourcesInterface {
     private final Map<String, ArrayList<TwigTreeNode>> map = new HashMap<>();
 
 
-    private final String twigResourcesTreePath = "template-map.json";
-    private final String FILE_NODE_TYPE = "file";
+    private final static String twigResourcesTreePath = "template-map.json";
     public final static String DIRECTORY_NODE_TYPE = "directory";
 
     protected static TwigResources instance = null;

@@ -37,7 +37,7 @@ public class CreateSprykerModuleAction extends CreateElementActionBase {
                 validator
         );
 
-        if (moduleName == null || moduleName.equals("")) {
+        if (moduleName == null || moduleName.isEmpty()) {
             return;
         }
         elementsConsumer.accept(validator.getCreatedElements());

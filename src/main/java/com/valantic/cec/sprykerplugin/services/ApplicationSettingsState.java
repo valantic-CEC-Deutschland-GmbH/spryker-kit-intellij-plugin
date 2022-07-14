@@ -26,6 +26,7 @@ public class ApplicationSettingsState implements PersistentStateComponent<Applic
         if (ApplicationManager.getApplication() != null) {
             return ApplicationManager.getApplication().getService(ApplicationSettingsState.class);
         }
+
         return null;
     }
     @Nullable

@@ -42,12 +42,10 @@ public class FileNameGenerator implements FileNameGeneratorInterface {
 
     private String getResultFileNameForValidationOrCodeCeption(String templateName, Context context) {
         if (templateName.toLowerCase().contains("validation") ) {
-            return "" + new UnderscoredFilter().apply(context.getModuleName(), null, null, null, 0)
-                    + "."
-                    + templateName.toLowerCase().replace(".twig", "");
+            return String.format("%s.%s", new UnderscoredFilter().apply(context.getModuleName(), null, null, null, 0), templateName.toLowerCase().replace(".twig", ""));
         }
 
-        return "" + templateName.replace(".twig", "");
+        return String.format("%s", templateName.replace(".twig", ""));
     }
 
     private String getResultFileNameForPhp(String templateName, Context context) {

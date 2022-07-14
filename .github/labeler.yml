@@ -1,0 +1,14 @@
+CI/CD:
+  - .github/workflows/**/*
+
+documentation:
+   - .github/ISSUE_TEMPLATE/*
+   - .github/*
+   - docs/**/*
+
+java:
+  - any: ['src/main/**/*.java']
+  - any: ['src/main/**/*.kt', 'src/**/*.kts']
+
+tests:
+  - any: ['src/test/**/*']

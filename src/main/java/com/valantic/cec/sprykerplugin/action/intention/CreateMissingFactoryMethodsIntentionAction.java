@@ -1,4 +1,4 @@
-package com.valantic.cec.sprykerplugin.action;
+package com.valantic.cec.sprykerplugin.action.intention;
 
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.codeInspection.util.IntentionFamilyName;
@@ -6,43 +6,35 @@ import com.intellij.codeInspection.util.IntentionName;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.jetbrains.rd.util.reactive.KeyValuePair;
+import com.jetbrains.php.lang.psi.PhpPsiUtil;
+import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.valantic.cec.sprykerplugin.command.CreateMethodCommand;
-import com.valantic.cec.sprykerplugin.model.Context;
-import com.valantic.cec.sprykerplugin.model.TwigTreeNode;
-import com.valantic.cec.sprykerplugin.services.TwigResources;
-import com.valantic.cec.sprykerplugin.services.ContextBuilderInterface;
-import com.valantic.cec.sprykerplugin.services.TwigResourcesInterface;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+/**
+ * Derived from AddMissingFactoryMethodsAction from the
+ * Spryker plugin https://github.com/tobi812/idea-php-spryker-plugin
+ */
+public class CreateMissingFactoryMethodsIntentionAction extends PsiElementBaseIntentionAction {
 
-public class CreateMethodFromTemplateIntentionAction extends PsiElementBaseIntentionAction {
     @Override
     public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
         CommandProcessor.getInstance().executeCommand(project, new Runnable() {
             @Override
             public void run() {
                 CreateMethodCommand command = project.getService(CreateMethodCommand.class);
-                command.createMethodFromTemplate(project, element);
+                command.createFactoryMethods(project, element);
             }
-        },"Add Spryker Method", null);
-
+        },"Create missing Spryker Factory Methods", null);
     }
 
     @Override
     public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-        VirtualFile file = element.getContainingFile().getVirtualFile();
-        if (file == null) {
-            return false;
-        }
-        Context context = project.getService(ContextBuilderInterface.class).createContextFromProjectAndFilePath(project, file.getPath(), file.isDirectory());
-        KeyValuePair<String, ArrayList<TwigTreeNode>> templates = project.getService(TwigResourcesInterface.class).getPathsToTwigResourcesForContext(context);
-
-        return templates != null;
+        PhpClass phpClass = PhpPsiUtil.getParentByCondition(element, PhpClass.INSTANCEOF);
+        if (phpClass == null) return false;
+        return this.isFactoryClass(phpClass);
     }
 
     @Override
@@ -52,6 +44,17 @@ public class CreateMethodFromTemplateIntentionAction extends PsiElementBaseInten
 
     @Override
     public @IntentionName @NotNull String getText() {
-        return "Create method from template for current context";
+        return "Create missing factory methods";
+    }
+
+    private boolean isFactoryClass(PhpClass phpClass) {
+        PhpClass currentClass = phpClass.getSuperClass();
+        while (currentClass != null) {
+            if (currentClass.getFQN().contains("AbstractFactory")) {
+                return true;
+            }
+            currentClass = currentClass.getSuperClass();
+        }
+        return false;
     }
 }

@@ -27,14 +27,19 @@
 
         <applicationService serviceImplementation="com.valantic.cec.sprykerplugin.services.ApplicationSettingsState"/>
         <intentionAction>
-            <className>com.valantic.cec.sprykerplugin.action.CreateMethodFromTemplateIntentionAction</className>
+            <className>com.valantic.cec.sprykerplugin.action.intention.CreateMethodFromTemplateIntentionAction</className>
             <category>PHP</category>
             <descriptionDirectoryName>CreateMethodFromTemplateIntentionAction</descriptionDirectoryName>
         </intentionAction>
         <intentionAction>
-            <className>com.valantic.cec.sprykerplugin.action.CreateMissingFactoryMethodsIntentionAction</className>
+            <className>com.valantic.cec.sprykerplugin.action.intention.CreateMissingFactoryMethodsIntentionAction</className>
             <category>PHP</category>
             <descriptionDirectoryName>CreateMissingFactoryMethodsIntentionAction</descriptionDirectoryName>
+        </intentionAction>
+        <intentionAction>
+            <className>com.valantic.cec.sprykerplugin.action.intention.DependencyProviderAddDependencyByConstantIntentionAction</className>
+            <category>PHP</category>
+            <descriptionDirectoryName>DependencyProviderAddDependencyByConstantIntentionAction</descriptionDirectoryName>
         </intentionAction>
     </extensions>
 

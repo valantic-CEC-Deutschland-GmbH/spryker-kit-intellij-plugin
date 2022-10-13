@@ -4,6 +4,7 @@ import com.intellij.ide.actions.CreateElementActionBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.NlsContexts;
+import com.intellij.openapi.util.NlsContexts.Command;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -17,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.Consumer;
+
+import static com.intellij.openapi.util.NlsContexts.*;
 
 public class CreateSprykerModuleAction extends CreateElementActionBase {
 
@@ -63,12 +66,12 @@ public class CreateSprykerModuleAction extends CreateElementActionBase {
     }
 
     @Override
-    protected @NlsContexts.DialogTitle String getErrorTitle() {
+    protected @DialogTitle String getErrorTitle() {
         return "Error Creating a New Spryker Module!";
     }
 
     @Override
-    protected @NlsContexts.Command String getActionName(PsiDirectory directory, String newName) {
+    protected @Command @NotNull String getActionName(@NotNull PsiDirectory directory, @NotNull String newName) {
         return "Create Spryker Module";
     }
 

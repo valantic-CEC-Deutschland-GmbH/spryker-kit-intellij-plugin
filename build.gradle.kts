@@ -9,7 +9,7 @@ plugins {
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.8.0"
+    id("org.jetbrains.intellij") version "1.12.0"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
@@ -114,7 +114,7 @@ tasks {
     }
 
     runIde {
-        jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
+        jvmArgs("-Xmx2024m", "-Xms512m", "-ea")
         ideDir.set(file(properties("platformIdeDir")))
     }
 
@@ -125,7 +125,7 @@ tasks {
         systemProperty("ide.mac.message.dialogs.as.sheets", "false")
         systemProperty("jb.privacy.policy.text", "<!--999.999-->")
         systemProperty("jb.consents.confirmation.enabled", "false")
-        jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
+        jvmArgs("-Xmx2024m", "-Xms512m", "-ea")
     }
 
     runIdePerformanceTest {

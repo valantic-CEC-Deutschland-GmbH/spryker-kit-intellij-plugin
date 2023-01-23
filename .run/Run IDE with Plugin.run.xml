@@ -13,7 +13,7 @@
           <option value="runIde" />
         </list>
       </option>
-      <option name="vmOptions" value="-Xmx2024m -Xms512m -XX:MaxPermSize=500m -ea" />
+      <option name="vmOptions" value="-Xmx2024m -Xms512m -ea" />
     </ExternalSystemSettings>
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>

@@ -1,6 +1,6 @@
 package com.valantic.cec.sprykerplugin.services;
 
-import com.github.hypfvieh.util.StringUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.Parameter;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
@@ -50,7 +50,7 @@ public class PhpClassStringGenerator implements PhpClassStringGeneratorInterface
                 docBlockElements.add(docBlockItem.value);
             }
 
-            docBlock.append(MessageFormat.format(" * {0}\n", StringUtil.join(" ", docBlockElements)));
+            docBlock.append(MessageFormat.format(" * {0}\n", StringUtil.join(docBlockElements, " ")));
         }
 
         docBlock.append(" */\n");
@@ -86,7 +86,7 @@ public class PhpClassStringGenerator implements PhpClassStringGeneratorInterface
             methodCalls.add(this.createMethodCallString(parameterType, methodPrefix));
         }
 
-        return StringUtil.join( ",", methodCalls);
+        return StringUtil.join(methodCalls, ",");
     }
 
     private String extractModuleNamespace(String namespaceName) {

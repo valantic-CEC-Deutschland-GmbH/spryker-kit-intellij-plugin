@@ -1,6 +1,7 @@
 package mock;
 
 import com.intellij.diagnostic.ActivityCategory;
+import com.intellij.openapi.extensions.ExtensionsArea;
 import com.intellij.openapi.extensions.PluginDescriptor;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
@@ -8,6 +9,7 @@ import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.MessageBus;
+import kotlinx.coroutines.CoroutineScope;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +32,7 @@ public class ProjectMock<T> implements Project {
 
     @Override
     public @org.jetbrains.annotations.NotNull String getName() {
-        return null;
+        return "mockProjectName";
     }
 
     @Override
@@ -62,7 +64,7 @@ public class ProjectMock<T> implements Project {
 
     @Override
     public @org.jetbrains.annotations.NotNull String getLocationHash() {
-        return null;
+        return "locationHash";
     }
 
     @Override
@@ -86,11 +88,20 @@ public class ProjectMock<T> implements Project {
     }
 
     @Override
+    public CoroutineScope getCoroutineScope() {
+        return null;
+    }
+
+    @Override
     public <T> T getComponent(@org.jetbrains.annotations.NotNull Class<T> interfaceClass) {
         return null;
     }
 
     @Override
+    public boolean hasComponent(@NotNull Class<?> interfaceClass) {
+        return false;
+    }
+
     public <T> T @NotNull [] getComponents(@NotNull Class<T> baseClass) {
         return null;
     }
@@ -121,6 +132,11 @@ public class ProjectMock<T> implements Project {
     }
 
     @Override
+    public @NotNull ExtensionsArea getExtensionArea() {
+        return null;
+    }
+
+    @Override
     public <T> T instantiateClassWithConstructorInjection(@NotNull Class<T> aClass, @NotNull Object key, @NotNull PluginId pluginId) {
         return null;
     }
@@ -143,6 +159,11 @@ public class ProjectMock<T> implements Project {
     @Override
     public @NotNull <T> Class<T> loadClass(@NotNull String className, @NotNull PluginDescriptor pluginDescriptor) throws ClassNotFoundException {
         return (Class<T>) ProjectMock.class.getClassLoader().loadClass(className);
+    }
+
+    @Override
+    public <T> @NotNull T instantiateClass(@NotNull String className, @NotNull PluginDescriptor pluginDescriptor) {
+        return null;
     }
 
     @Override

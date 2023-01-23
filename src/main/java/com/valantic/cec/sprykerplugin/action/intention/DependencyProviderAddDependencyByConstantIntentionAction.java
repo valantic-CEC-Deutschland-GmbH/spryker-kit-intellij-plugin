@@ -63,6 +63,7 @@ public class DependencyProviderAddDependencyByConstantIntentionAction extends Ps
 
         Context context = project.getService(ContextBuilderInterface.class).createContextFromProjectAndFilePath(project, file.getPath(), file.isDirectory());
 
+
         return true;
     }
 

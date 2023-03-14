@@ -1,6 +1,10 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.7] - 2022.07.09
+### Bugfix
+- Wrong Factory class name in Service layer (thx@Lkopo)
+
 ## [1.0.6] - 2022.07.09
 ### Added
 - OpenSource SprykerKIT, Contribute templates on https://github.com/nexusunited/spryker-kit-intellij-plugin/tree/main/src/main/resources/templates

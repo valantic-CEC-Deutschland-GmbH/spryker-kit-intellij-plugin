@@ -46,7 +46,7 @@
     {"type":"directory","name":"Service","contents":[
       {"type":"file","name":"Config.php.twig"},
       {"type":"file","name":"DependencyProvider.php.twig"},
-      {"type":"file","name":"Factory.php.twig"},
+      {"type":"file","name":"ServiceFactory.php.twig"},
       {"type":"file","name":"ServiceInterface.php.twig"},
       {"type":"file","name":"Service.php.twig"}
   ]},

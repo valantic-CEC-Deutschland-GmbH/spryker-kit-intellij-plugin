@@ -114,6 +114,15 @@ tasks {
     }
 
     runIde {
+        var PhpStormDir = File(properties("platformIdeDir"))
+        var found = "not"
+        if (PhpStormDir.isDirectory()) {
+            found = ""
+        };
+        logger.lifecycle("PhpStorm dir {} {} found", PhpStormDir.name, found)
+        if (PhpStormDir.isDirectory()) {
+            logger.lifecycle("Numberof files in directory: {}", PhpStormDir.listFiles().size)
+        }
         jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
         ideDir.set(file(properties("platformIdeDir")))
     }

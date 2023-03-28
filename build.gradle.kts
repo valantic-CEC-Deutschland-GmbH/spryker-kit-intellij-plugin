@@ -114,6 +114,8 @@ tasks {
     }
 
     runIde {
+        var phpStormDir = File("~/.PhpStorm2022.3.3/")
+        logger.debug("phpStormDir {} does exists: {}", phpStormDir.name, phpStormDir.isDirectory );
         jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
         ideDir.set(file(properties("platformIdeDir")))
     }

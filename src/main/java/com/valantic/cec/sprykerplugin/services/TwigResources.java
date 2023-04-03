@@ -1,15 +1,15 @@
 package com.valantic.cec.sprykerplugin.services;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.intellij.openapi.project.Project;
 import com.jetbrains.rd.util.reactive.KeyValuePair;
 import com.valantic.cec.sprykerplugin.constants.SprykerConstants;
 import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.model.TwigTreeNode;
 import com.valantic.cec.sprykerplugin.resources.FileResource;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,13 +32,13 @@ public class TwigResources implements TwigResourcesInterface {
     //ToDo: Alles im Ordner != src ist modulspezifisch
     public TwigResources(Project project) {
         this.project = project;
-        JSONParser jsonParser = new JSONParser();
 
         String jsonString = FileResource.readFileContentFromResources(twigResourcesTreePath);
-        JSONArray arr = null;
+        JsonArray arr = null;
+        Gson gson = new Gson();
         try {
-            arr = (JSONArray) jsonParser.parse(jsonString);
-        } catch (ParseException e) {
+            arr = gson.fromJson(jsonString, JsonArray.class);
+        } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
         if (arr == null) {
@@ -103,10 +103,10 @@ public class TwigResources implements TwigResourcesInterface {
     }
 
     private TwigTreeNode createTreeNodeFromJSONObject(Object obj) {
-        JSONObject jsonObj = (JSONObject) obj;
+        JsonObject jsonObj = (JsonObject) obj;
 
-        String type = (String) jsonObj.get("type");
-        String name = (String) jsonObj.get("name");
+        String type = (jsonObj.get("type") != null) ? jsonObj.get("type").getAsString() : null;
+        String name = (jsonObj.get("name") != null) ? jsonObj.get("name").getAsString() : null;
         Object contentsObj = jsonObj.get("contents");
 
         TwigTreeNode[] contents = null;
@@ -118,7 +118,7 @@ public class TwigResources implements TwigResourcesInterface {
     }
 
     private TwigTreeNode[] getTwigTreeNodesFromArray(Object array) {
-        JSONArray arr = (JSONArray) array;
+        JsonArray arr = (JsonArray) array;
 
         int length = arr.size();
         TwigTreeNode[] nodes = new TwigTreeNode[length];

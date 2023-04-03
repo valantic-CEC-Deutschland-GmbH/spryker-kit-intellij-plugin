@@ -32,13 +32,12 @@ repositories {
 dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
     implementation("com.jayway.jsonpath:json-path:2.7.0") {
         exclude("org.slf4j", "slf4j-api")
     }
 
     // als twig parser https://pebbletemplates.io/ + exclude slf4j, da es anscheinend schon intellij added und singleton ist
-    implementation("io.pebbletemplates:pebble:3.1.5") {
+    implementation("io.pebbletemplates:pebble:3.1.6") {
         exclude("org.slf4j", "slf4j-api")
     }
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0")

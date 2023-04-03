@@ -11,12 +11,9 @@ import com.intellij.util.IncorrectOperationException;
 import com.jetbrains.php.lang.psi.PhpPsiUtil;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.elements.impl.ClassConstImpl;
-import com.jetbrains.rd.util.reactive.KeyValuePair;
 import com.valantic.cec.sprykerplugin.model.Context;
-import com.valantic.cec.sprykerplugin.model.TwigTreeNode;
 import com.valantic.cec.sprykerplugin.model.dependency.SprykerDependency;
 import com.valantic.cec.sprykerplugin.services.ContextBuilderInterface;
-import com.valantic.cec.sprykerplugin.services.TwigResourcesInterface;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

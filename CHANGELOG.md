@@ -3,6 +3,7 @@
 # intellij_spryker_plugin Changelog
 ## [1.0.8] - 2023.04.03
 ### Compatibility
+- added new tag
 - removed deprecated API calls
 - upgraded to Java 17 
 - upgraded to gradle 8.0.2

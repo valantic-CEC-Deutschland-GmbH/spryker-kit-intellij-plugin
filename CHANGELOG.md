@@ -1,6 +1,10 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.9] - 2023.04.03
+- updated org.jetbrains.intellij
+- updated pipeline
+
 ## [1.0.8] - 2023.04.03
 ### Compatibility
 - added new tag

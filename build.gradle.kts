@@ -9,7 +9,7 @@ plugins {
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.7.0"
+    id("org.jetbrains.intellij") version "1.13.2"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
@@ -32,13 +32,12 @@ repositories {
 dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
-    implementation("com.googlecode.json-simple:json-simple:1.1.1")
     implementation("com.jayway.jsonpath:json-path:2.7.0") {
         exclude("org.slf4j", "slf4j-api")
     }
 
     // als twig parser https://pebbletemplates.io/ + exclude slf4j, da es anscheinend schon intellij added und singleton ist
-    implementation("io.pebbletemplates:pebble:3.1.5") {
+    implementation("io.pebbletemplates:pebble:3.1.6") {
         exclude("org.slf4j", "slf4j-api")
     }
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0")
@@ -114,8 +113,7 @@ tasks {
     }
 
     runIde {
-        jvmArgs("-Xmx2024m", "-Xms512m", "-XX:MaxPermSize=500m", "-ea")
-        ideDir.set(file(properties("platformIdeDir")))
+        jvmArgs("-Xmx2024m", "-Xms512m", "-ea")
     }
 
     // Configure UI tests plugin

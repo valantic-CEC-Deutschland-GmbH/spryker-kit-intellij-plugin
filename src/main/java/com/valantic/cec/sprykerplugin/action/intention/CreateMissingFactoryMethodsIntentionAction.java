@@ -21,18 +21,13 @@ public class CreateMissingFactoryMethodsIntentionAction extends PsiElementBaseIn
 
     @Override
     public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-            @Override
-            public void run() {
-                CreateMethodCommand command = project.getService(CreateMethodCommand.class);
-                command.createFactoryMethods(project, element);
-            }
-        },"Create missing Spryker Factory Methods", null);
+        CreateMethodCommand command = project.getService(CreateMethodCommand.class);
+        command.createFactoryMethods(project, element);
     }
 
     @Override
     public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-        PhpClass phpClass = PhpPsiUtil.getParentByCondition(element, PhpClass.INSTANCEOF);
+        PhpClass phpClass = PhpPsiUtil.getParentOfClass(element, PhpClass.class);
         if (phpClass == null) return false;
         return this.isFactoryClass(phpClass);
     }

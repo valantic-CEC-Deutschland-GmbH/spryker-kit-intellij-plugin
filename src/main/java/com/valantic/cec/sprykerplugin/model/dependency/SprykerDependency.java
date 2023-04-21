@@ -7,15 +7,19 @@ public class SprykerDependency {
     private String moduleName;
     private String dependencyType;
 
+    private String constantPropertyName;
+
     private static String[] validDependencyTypes = {"CLIENT", "FACADE", "SERVICE", "QUERY_CONTAINER"};
 
-    private SprykerDependency(String moduleName, String dependencyType){
+    private SprykerDependency(String constantPropertyName, String moduleName, String dependencyType){
 
         this.moduleName = moduleName;
         this.dependencyType = dependencyType;
+        this.constantPropertyName = constantPropertyName;
     }
 
     public static SprykerDependency fromString(String dependencyProviderConstant) {
+
         StringTokenizer tokenizer = new StringTokenizer(dependencyProviderConstant, "_");
 
         String moduleName = null;
@@ -47,23 +51,32 @@ public class SprykerDependency {
             moduleName = (moduleName != null) ? moduleName + stringToCamelCaseStartingWithUpperCase(text) : stringToCamelCaseStartingWithUpperCase(text);
         }
 
-        return null;
+        return new SprykerDependency(dependencyProviderConstant, moduleName, dependencyType);
     }
 
     private static String stringToCamelCaseStartingWithUpperCase(String text) {
-// todo
-        return  text.charAt(0) + text.substring(1).toLowerCase();
+        return  text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
     }
 
     public String getMethodName() {
 
-        return "add" + this.moduleName + this.dependencyType;
+        return "add" + this.moduleName + stringToCamelCaseStartingWithUpperCase(this.dependencyType);
     }
 
     private static boolean isValidDependencyType(String dependencyTypeCandidate) {
-        if (Arrays.asList(validDependencyTypes).contains(dependencyTypeCandidate)) {
-            return true;
-        }
-        return false;
+        return (Arrays.asList(validDependencyTypes).contains(dependencyTypeCandidate));
+    }
+
+
+    public String getMethodBody() {
+        return "$container->set(static::" + this.constantPropertyName + ", function (Container $container) {\n" +
+                "    return $container->getLocator()-> " + this.toCamelCaseStartingWithLowerCase(this.moduleName) + "()->" + this.dependencyType.toLowerCase() + "();\n" +
+                "});\n" +
+                "\n" +
+                "return $container;";
+    }
+
+    private String toCamelCaseStartingWithLowerCase(String moduleName) {
+        return moduleName.substring(0, 1).toLowerCase() + moduleName.substring(1);
     }
 }

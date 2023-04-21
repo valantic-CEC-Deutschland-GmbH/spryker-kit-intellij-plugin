@@ -8,28 +8,37 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.PhpPsiUtil;
+import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.elements.impl.ClassConstImpl;
-import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.model.dependency.SprykerDependency;
-import com.valantic.cec.sprykerplugin.services.ContextBuilderInterface;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 public class DependencyProviderAddDependencyByConstantIntentionAction extends PsiElementBaseIntentionAction {
     @Override
     public @IntentionName @NotNull String getText() {
-        return "DependencyProviderAddDependencyByConstantIntentionAction";
+        return "Create method for adding the dependency.";
     }
 
     @Override
     public @NotNull @IntentionFamilyName String getFamilyName() {
-        return "Spryker plugin";
+        return "SprykerKit plugin";
     }
 
 
+    /**
+     * find out if current psi element is a public constant in a class that extends Spryker DependencyProvider
+     * And check if a method related to the name of the constant exists in the same class
+     * If that kind of method doesn't exist return true
+     *
+     * @param project the project in which the availability is checked.
+     * @param editor  the editor in which the intention will be invoked.
+     * @param element the element under caret.
+     *
+     * @return
+     */
     @Override
     public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
         VirtualFile file = element.getContainingFile().getVirtualFile();
@@ -37,7 +46,7 @@ public class DependencyProviderAddDependencyByConstantIntentionAction extends Ps
             return false;
         }
 
-        PhpClass phpClass = PhpPsiUtil.getParentByCondition(element, PhpClass.INSTANCEOF);
+        PhpClass phpClass = PhpPsiUtil.getParentOfClass(element, PhpClass.class);
         if (phpClass == null) {
             return false;
         }
@@ -45,32 +54,68 @@ public class DependencyProviderAddDependencyByConstantIntentionAction extends Ps
             return false;
         }
 
-        if (!(element.getParent() instanceof ClassConstImpl)) {
+        if (!(element.getParent() instanceof ClassConstImpl constantProperty)) {
             return false;
         }
-        ClassConstImpl constant = (ClassConstImpl) element.getParent();
 
-        SprykerDependency dependency = SprykerDependency.fromString(constant.getName());
+        SprykerDependency dependency = SprykerDependency.fromString(constantProperty.getName());
 
         if (dependency == null) {
             return false;
         }
 
         String methodName = dependency.getMethodName();
+        if (methodName == null) {
+            return false;
+        }
 
-        Context context = project.getService(ContextBuilderInterface.class).createContextFromProjectAndFilePath(project, file.getPath(), file.isDirectory());
-
+        // check if method exists
+        if (phpClass.findMethodByName(methodName) != null) {
+            return false;
+        }
 
         return true;
     }
 
     @Override
     public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
+        VirtualFile file = element.getContainingFile().getVirtualFile();
+        if (file == null) {
+            return;
+        }
 
+        PhpClass phpClass = PhpPsiUtil.getParentOfClass(element, PhpClass.class);
+        if (phpClass == null) {
+            return;
+        }
+        if (!phpClass.getName().endsWith("DependencyProvider")) {
+            return;
+        }
+
+        if (!(element.getParent() instanceof ClassConstImpl constantProperty)) {
+            return;
+        }
+
+        SprykerDependency dependency = SprykerDependency.fromString(constantProperty.getName());
+
+        if (dependency == null) {
+            return;
+        }
+
+        String methodName = dependency.getMethodName();
+        if (methodName == null) {
+            return;
+        }
+
+        // add method to class
+        String methodBody = dependency.getMethodBody();
+        String methodString = createMethodString(methodName, methodBody);
+        Method method = PhpPsiElementFactory.createMethod(project, methodString);
+
+        phpClass.addBefore(method, phpClass.getLastChild());
     }
 
-    @Override
-    public boolean startInWriteAction() {
-        return false;
+    private String createMethodString(String methodName, String methodBody) {
+        return "public function " + methodName + "(Container $container): Container {\n" + methodBody + "\n}";
     }
 }

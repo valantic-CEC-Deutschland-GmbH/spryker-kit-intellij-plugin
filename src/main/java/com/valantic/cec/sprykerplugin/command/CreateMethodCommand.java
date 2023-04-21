@@ -37,7 +37,7 @@ public class CreateMethodCommand {
             return;
         }
 
-        PhpClass mainClass = PhpPsiUtil.getParentByCondition(element, PhpClass.INSTANCEOF);
+        PhpClass mainClass = PhpPsiUtil.getParentOfClass(element, com.jetbrains.php.lang.psi.elements.PhpClass.class);
         if (mainClass == null) {
             return;
         }

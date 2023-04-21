@@ -13,7 +13,6 @@ import com.jetbrains.rd.util.reactive.KeyValuePair;
 import com.valantic.cec.sprykerplugin.command.CreateMethodCommand;
 import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.model.TwigTreeNode;
-import com.valantic.cec.sprykerplugin.services.TwigResources;
 import com.valantic.cec.sprykerplugin.services.ContextBuilderInterface;
 import com.valantic.cec.sprykerplugin.services.TwigResourcesInterface;
 import org.jetbrains.annotations.NotNull;

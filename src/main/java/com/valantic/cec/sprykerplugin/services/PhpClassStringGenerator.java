@@ -92,6 +92,9 @@ public class PhpClassStringGenerator implements PhpClassStringGeneratorInterface
     private String extractModuleNamespace(String namespaceName) {
         String preparedNamespace = namespaceName.replaceAll("^\\\\", "");
         String[] namespaceSegments = preparedNamespace.split("\\\\");
+        if (namespaceSegments.length < 3) {
+            return "";
+        }
         String appName = namespaceSegments[1];
         int occurence = 3;
 

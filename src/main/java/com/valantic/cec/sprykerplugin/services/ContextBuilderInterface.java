@@ -11,5 +11,9 @@ public interface ContextBuilderInterface {
 
     Context createContextFromAnActionEvent(AnActionEvent event);
 
+    Context createContextFromContextString(String necessaryContextString);
+
     Context createContextFromProjectAndFilePath(Project project, String filePath, boolean isDirectory);
+
+    Context createContextFromNameSpaceName(Project project, String nameSpaceName, String className, String dirName);
 }

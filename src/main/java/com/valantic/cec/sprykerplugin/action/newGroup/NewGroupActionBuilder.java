@@ -2,15 +2,11 @@ package com.valantic.cec.sprykerplugin.action.newGroup;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.jetbrains.rd.util.reactive.KeyValuePair;
-import com.valantic.cec.sprykerplugin.action.CreateDirectoryAction;
-import com.valantic.cec.sprykerplugin.action.CreateSprykerModuleAction;
-import com.valantic.cec.sprykerplugin.action.CreateFileFromTemplateAction;
-import com.valantic.cec.sprykerplugin.action.CreateMethodFromTemplateAction;
+import com.valantic.cec.sprykerplugin.action.*;
 import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.model.TwigTreeNode;
-import com.valantic.cec.sprykerplugin.services.FileNameGeneratorInterface;
-import com.valantic.cec.sprykerplugin.services.TwigResources;
-import com.valantic.cec.sprykerplugin.services.TwigResourcesInterface;
+import com.valantic.cec.sprykerplugin.model.chatgpt.ChatGptPromptInterface;
+import com.valantic.cec.sprykerplugin.services.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -44,36 +40,83 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
 
         KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap = resources.getPathsToTwigResourcesAndSprykerDirectoriesForContext(context);
 
-        if (resourcesMap == null) {
+        ArrayList<ChatGptPromptInterface> matchingPrompts = getMatchingPrompts(context);
+
+        if ((resourcesMap == null) && (matchingPrompts.isEmpty())) {
             return new AnAction[]{
                     new CreateFileFromTemplateAction("No class to generate", false)
             };
         }
-        return getContextMenuAction(context, resourcesMap);
+        return getContextMenuAction(context, resourcesMap, matchingPrompts);
+    }
+
+    private ArrayList<ChatGptPromptInterface> getMatchingPrompts(Context context) {
+        ProjectSettingsState projectSettings =  context.getProject().getService(ProjectSettingsState.class);
+
+        ArrayList<ChatGptPromptInterface> prompts = projectSettings.prompts;
+
+        ArrayList<ChatGptPromptInterface> matchingPrompts = new ArrayList<>();
+
+        for (ChatGptPromptInterface prompt : prompts) {
+            if (prompt == null) {
+                continue;
+            }
+            Context necessaryContext = context.getProject()
+                    .getService(ContextBuilderInterface.class)
+                .createContextFromContextString(prompt.getNecessaryContextString());
+
+            if ((necessaryContext != null) && necessaryContext.matches(context)) {
+                matchingPrompts.add(prompt);
+            }
+        }
+
+        return matchingPrompts;
     }
 
     @NotNull
-    private AnAction[] getContextMenuAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
-        AnAction[] menuAction;
-        if(context.getClassName() != null) {
-            menuAction = getCreateMethodActions(context, resourcesMap);
-        } else if (context.getModuleName() != null) {
-            AnAction[] fileActions = getCreateFileActions(context, resourcesMap);
-            AnAction[] dirActions = getCreateDirectoryActions(context, resourcesMap);
-            menuAction = Arrays.copyOf(fileActions, fileActions.length + dirActions.length);
-            System.arraycopy(dirActions, 0, menuAction, fileActions.length, dirActions.length);
-        } else {
-            menuAction = getCreateBundleAction(context, resourcesMap);
+    private AnAction[] getContextMenuAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap, ArrayList<ChatGptPromptInterface> matchingPrompts) {
+        ArrayList<AnAction> actions = new ArrayList<AnAction>();
+
+        if (resourcesMap != null) {
+            actions.addAll(getTwigBasedActions(context, resourcesMap, actions));
+        }
+        if (matchingPrompts != null) {
+            actions.addAll(getPromptsActions(context, matchingPrompts));
         }
 
-        return menuAction;
+        int size = actions.size();
+        AnAction[] ret = new AnAction[size];
+
+        return actions.toArray(ret);
     }
 
-    private AnAction[] getCreateDirectoryActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
-        ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
-        ArrayList<CreateDirectoryAction> actions = new ArrayList<>();
+    @NotNull
+    private ArrayList<AnAction> getTwigBasedActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap, ArrayList<AnAction> actions) {
+        if(context.getClassName() != null) {
+            actions = getCreateMethodActions(context, resourcesMap);
 
-        AnAction[] menuAction = new AnAction[0];
+        } else if (context.getModuleName() != null) {
+            actions.addAll(getCreateFileActions(context, resourcesMap));
+            actions.addAll(getCreateDirectoryActions(context, resourcesMap));
+        } else {
+            actions.addAll(getCreateBundleAction(context, resourcesMap));
+        }
+        return actions;
+    }
+
+    private ArrayList<AnAction> getPromptsActions(Context context, ArrayList<ChatGptPromptInterface> matchingPrompts) {
+        ArrayList<AnAction> actions = new ArrayList<>();
+
+        for (ChatGptPromptInterface prompt : matchingPrompts) {
+            actions.add(new ChatGptContextAction(prompt, context));
+        }
+
+        return actions;
+    }
+
+    private ArrayList<AnAction> getCreateDirectoryActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
+        ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
+        ArrayList<AnAction> actions = new ArrayList<>();
 
         int i = 0;
         for (TwigTreeNode twigTreeNode : twigTreeNodes) {
@@ -87,41 +130,39 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
                 );
             }
         }
-        menuAction = actions.toArray(menuAction);
-        return menuAction;
+        return actions;
     }
 
-    private AnAction[] getCreateBundleAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
-        AnAction[] ret = new AnAction[1];
-        ret[0] = (new CreateSprykerModuleAction());
+    private ArrayList<AnAction> getCreateBundleAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
+        ArrayList<AnAction> ret = new ArrayList<>(1);
+        ret.add(new CreateSprykerModuleAction());
+
         return ret;
     }
 
-    private AnAction[] getCreateMethodActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
+    private ArrayList<AnAction> getCreateMethodActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
         ArrayList<TwigTreeNode> methodTemplates = resourcesMap.getValue();
 
         int length = methodTemplates.size();
-        AnAction[] menuAction = new AnAction[length];
+        ArrayList<AnAction> actions = new ArrayList<>(length);
 
         int i = 0;
         for (TwigTreeNode templateNode : methodTemplates )
         {
             String resultMethodName = templateNode.getName().replace(".twig","")
                     .replace(context.getApplicationName(), "");
-            menuAction[i++] = new CreateMethodFromTemplateAction("Create " + resultMethodName,
+            actions.add(new CreateMethodFromTemplateAction("Create " + resultMethodName,
                     context,
                     templateNode.getName(),
-                    true);
+                    true));
         }
-        return menuAction;
+        return actions;
     }
 
     @NotNull
-    private AnAction[] getCreateFileActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
+    private ArrayList<AnAction> getCreateFileActions(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap) {
         ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
-        ArrayList<CreateFileFromTemplateAction> actions = new ArrayList<>();
-
-        AnAction[] menuAction = new AnAction[0];
+        ArrayList<AnAction> actions = new ArrayList<>();
 
         int i = 0;
         for (TwigTreeNode twigTreeNode : twigTreeNodes)
@@ -135,7 +176,6 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
                 continue;
             }
 
-
             actions.add(new CreateFileFromTemplateAction("Create " + resultFileName,
                     context,
                     twigTreeNode.getName(),
@@ -143,8 +183,8 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
                     true)
             );
         }
-        menuAction = actions.toArray(menuAction);
-        return menuAction;
+
+        return actions;
     }
 
 }

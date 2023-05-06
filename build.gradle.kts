@@ -40,6 +40,8 @@ dependencies {
     implementation("io.pebbletemplates:pebble:3.1.6") {
         exclude("org.slf4j", "slf4j-api")
     }
+    // add chatgpt
+    implementation("com.theokanning.openai-gpt3-java:service:0.12.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0")
 }
 

@@ -24,6 +24,8 @@
                         serviceImplementation="com.valantic.cec.sprykerplugin.services.FileNameGenerator" />
 
         <projectService serviceImplementation="com.valantic.cec.sprykerplugin.services.ProjectSettingsState" />
+        <projectService serviceInterface="com.valantic.cec.sprykerplugin.services.ChatGptExecuterInterface"
+                        serviceImplementation="com.valantic.cec.sprykerplugin.services.ChatGptExecuter" />
 
         <applicationService serviceImplementation="com.valantic.cec.sprykerplugin.services.ApplicationSettingsState"/>
         <intentionAction>
@@ -35,6 +37,11 @@
             <className>com.valantic.cec.sprykerplugin.action.CreateMissingFactoryMethodsIntentionAction</className>
             <category>PHP</category>
             <descriptionDirectoryName>CreateMissingFactoryMethodsIntentionAction</descriptionDirectoryName>
+        </intentionAction>
+        <intentionAction>
+            <className>com.valantic.cec.sprykerplugin.action.ChatGptIntentionAction</className>
+            <category>PHP</category>
+            <descriptionDirectoryName>ChatGptIntentionAction</descriptionDirectoryName>
         </intentionAction>
     </extensions>
 

@@ -1,7 +1,7 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
-## [1.0.11]
+## [1.0.11] - 2023.04.25
 - replaced deprecated API calls
   - PhpPsiUtil.getParentByCondition
 - fixed ArrayOutOfBoundsException in SprykerModuleAction

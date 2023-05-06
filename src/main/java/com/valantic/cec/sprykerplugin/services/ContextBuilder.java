@@ -4,8 +4,16 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.jetbrains.php.lang.psi.PhpFile;
+import com.jetbrains.php.lang.psi.PhpFileImpl;
+import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.constants.SprykerConstants;
+
+import java.util.Arrays;
 
 public class ContextBuilder implements ContextBuilderInterface {
 
@@ -28,6 +36,18 @@ public class ContextBuilder implements ContextBuilderInterface {
         }
     }
 
+    public Context createContextFromContextString(String necessaryContextString) {
+        String[] contextParts = necessaryContextString.split("\\.");
+        String projectOrVendorName = contextParts[0];
+        String applicationName = contextParts[1];
+        String moduleName = contextParts[2];
+        String innerPath = contextParts[3];
+        String className = contextParts[4];
+        String dirPath = contextParts[5];
+
+        return new Context(projectOrVendorName, applicationName, moduleName, innerPath, className, dirPath, this.project);
+    }
+
     public Context createContextFromFilePath(String filePath, boolean isDirectory) {
         String applicationName = getApplicationNameFromPath(filePath);
         String moduleName = getModuleNameFromPath(filePath, applicationName);
@@ -46,11 +66,26 @@ public class ContextBuilder implements ContextBuilderInterface {
     public Context createContextFromAnActionEvent(AnActionEvent event) {
         if (event == null) return null;
         VirtualFile file = event.getDataContext().getData(LangDataKeys.VIRTUAL_FILE);
-        Project project = event.getProject();
-        if (file == null) return null;
-        String filePath = file.getPath();
-        boolean isDirectory = file.isDirectory();
-        return createContextFromProjectAndFilePath(project, filePath, isDirectory);
+
+        ProjectSettingsState projectSettings = this.project.getService(ProjectSettingsState.class);
+        if (projectSettings.openAiApiKey != null && projectSettings.prompts != null) {
+            if (file == null) {
+                return null;
+            }
+            PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
+            if (psiFile == null) {
+                return null;
+            }
+            PhpFile phpFile = new PhpFileImpl(psiFile.getViewProvider());
+            PhpClass phpClass = PsiTreeUtil.findChildOfType(phpFile, PhpClass.class);
+            if (phpClass == null) {
+                return null;
+            }
+            String nameSpaceName = phpClass.getNamespaceName();
+
+            return createContextFromNameSpaceName(project, nameSpaceName, phpClass.getName(), file.getPath());
+        }
+        return null;
     }
 
     @Override
@@ -66,6 +101,28 @@ public class ContextBuilder implements ContextBuilderInterface {
         String dirName = isDirectory? filePath : filePath.substring(0, filePath.lastIndexOf("/"));
 
         return new Context(applicationName, moduleName, innerPath, className, dirName, project);
+    }
+
+    @Override
+    public Context createContextFromNameSpaceName(Project project, String nameSpaceName, String className, String dirName) {
+        if (nameSpaceName.startsWith("\\")) {
+            nameSpaceName = nameSpaceName.substring(1);
+        }
+
+        String[] nameSpaceParts = nameSpaceName.split("\\\\");
+        if (nameSpaceParts.length < 3) {
+            return null;
+        }
+        String projectOrVendorName = nameSpaceParts[0];
+        String applicationName = nameSpaceParts[1];
+        String moduleName = nameSpaceParts[2];
+        String innerPath = "";
+
+        if (nameSpaceParts.length > 3) {
+            innerPath = String.join("/", Arrays.copyOfRange(nameSpaceParts, 3, nameSpaceParts.length));
+        }
+
+        return new Context(projectOrVendorName, applicationName, moduleName, innerPath, className, dirName, project);
     }
 
     private String getInnerPathFromPath(String filePath, String applicationName, String moduleName, boolean isDirectory) {

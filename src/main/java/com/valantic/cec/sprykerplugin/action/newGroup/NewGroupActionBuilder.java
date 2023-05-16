@@ -5,15 +5,14 @@ import com.jetbrains.rd.util.reactive.KeyValuePair;
 import com.valantic.cec.sprykerplugin.action.*;
 import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.model.TwigTreeNode;
+import com.valantic.cec.sprykerplugin.model.chatgpt.ChatGptPrompt;
 import com.valantic.cec.sprykerplugin.model.chatgpt.ChatGptPromptInterface;
 import com.valantic.cec.sprykerplugin.services.*;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
 
@@ -40,7 +39,7 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
 
         KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap = resources.getPathsToTwigResourcesAndSprykerDirectoriesForContext(context);
 
-        ArrayList<ChatGptPromptInterface> matchingPrompts = getMatchingPrompts(context);
+        ArrayList<ChatGptPrompt> matchingPrompts = getMatchingPrompts(context);
 
         if ((resourcesMap == null) && (matchingPrompts.isEmpty())) {
             return new AnAction[]{
@@ -50,14 +49,14 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         return getContextMenuAction(context, resourcesMap, matchingPrompts);
     }
 
-    private ArrayList<ChatGptPromptInterface> getMatchingPrompts(Context context) {
+    private ArrayList<ChatGptPrompt> getMatchingPrompts(Context context) {
         ProjectSettingsState projectSettings =  context.getProject().getService(ProjectSettingsState.class);
 
-        ArrayList<ChatGptPromptInterface> prompts = projectSettings.prompts;
+        ArrayList<ChatGptPrompt> prompts = projectSettings.prompts;
 
-        ArrayList<ChatGptPromptInterface> matchingPrompts = new ArrayList<>();
+        ArrayList<ChatGptPrompt> matchingPrompts = new ArrayList<>();
 
-        for (ChatGptPromptInterface prompt : prompts) {
+        for (ChatGptPrompt prompt : prompts) {
             if (prompt == null) {
                 continue;
             }
@@ -74,8 +73,8 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
     }
 
     @NotNull
-    private AnAction[] getContextMenuAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap, ArrayList<ChatGptPromptInterface> matchingPrompts) {
-        ArrayList<AnAction> actions = new ArrayList<AnAction>();
+    private AnAction[] getContextMenuAction(Context context, KeyValuePair<String, ArrayList<TwigTreeNode>> resourcesMap, ArrayList<ChatGptPrompt> matchingPrompts) {
+        ArrayList<AnAction> actions = new ArrayList<>();
 
         if (resourcesMap != null) {
             actions.addAll(getTwigBasedActions(context, resourcesMap, actions));
@@ -104,7 +103,7 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         return actions;
     }
 
-    private ArrayList<AnAction> getPromptsActions(Context context, ArrayList<ChatGptPromptInterface> matchingPrompts) {
+    private ArrayList<AnAction> getPromptsActions(Context context, ArrayList<ChatGptPrompt> matchingPrompts) {
         ArrayList<AnAction> actions = new ArrayList<>();
 
         for (ChatGptPromptInterface prompt : matchingPrompts) {
@@ -118,7 +117,6 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
         ArrayList<AnAction> actions = new ArrayList<>();
 
-        int i = 0;
         for (TwigTreeNode twigTreeNode : twigTreeNodes) {
             String resultDirName = twigTreeNode.getName();
             if (twigTreeNode.getType().equals(TwigResources.DIRECTORY_NODE_TYPE)
@@ -146,7 +144,6 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         int length = methodTemplates.size();
         ArrayList<AnAction> actions = new ArrayList<>(length);
 
-        int i = 0;
         for (TwigTreeNode templateNode : methodTemplates )
         {
             String resultMethodName = templateNode.getName().replace(".twig","")
@@ -164,7 +161,6 @@ public class NewGroupActionBuilder implements NewGroupActionBuilderInterface {
         ArrayList<TwigTreeNode> twigTreeNodes = resourcesMap.getValue();
         ArrayList<AnAction> actions = new ArrayList<>();
 
-        int i = 0;
         for (TwigTreeNode twigTreeNode : twigTreeNodes)
         {
             String resultFileName = context.getProject().getService(FileNameGeneratorInterface.class).

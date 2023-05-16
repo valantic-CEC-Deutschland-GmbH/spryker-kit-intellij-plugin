@@ -1,15 +1,9 @@
 package com.valantic.cec.sprykerplugin.model.chatgpt;
 
-import com.intellij.openapi.project.Project;
-
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.io.Serializable;
 
 public class ChatGptPrompt implements ChatGptPromptInterface, Serializable {
-
-
     @Serial
     public String necessaryContextString;
 
@@ -19,13 +13,16 @@ public class ChatGptPrompt implements ChatGptPromptInterface, Serializable {
     @Serial
     private String promptType;
 
+    private String intentionText;
+
     public ChatGptPrompt() {
     }
 
-    public ChatGptPrompt(String necessaryContextString, String prompt, String promptType) {
+    public ChatGptPrompt(String necessaryContextString, String prompt, String promptType, String intentionText) {
         this.necessaryContextString = necessaryContextString;
         this.prompt = prompt;
         this.promptType = promptType;
+        this.intentionText = intentionText;
     }
 
     public void setPrompt(String prompt) {
@@ -53,5 +50,13 @@ public class ChatGptPrompt implements ChatGptPromptInterface, Serializable {
     @Override
     public String getNecessaryContextString() {
         return necessaryContextString;
+    }
+
+    public String getIntentionText() {
+        return intentionText;
+    }
+
+    public void setIntentionText(String intentionText) {
+        this.intentionText = intentionText;
     }
 }

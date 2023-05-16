@@ -3,9 +3,8 @@ package com.valantic.cec.sprykerplugin.services;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.valantic.cec.sprykerplugin.model.chatgpt.ChatGptPromptInterface;
+import com.valantic.cec.sprykerplugin.model.chatgpt.ChatGptPrompt;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,9 +31,9 @@ public class ProjectSettingsState implements PersistentStateComponent<ProjectSet
     /**
      * The list of prompts that are used to generate the chatbot responses.
      *
-     * @see ChatGptPromptInterface
+     * @see ChatGptPrompt
      */
-    public ArrayList<ChatGptPromptInterface> prompts = new ArrayList<>();
+    public ArrayList<ChatGptPrompt> prompts = new ArrayList<>();
 
     public ProjectSettingsState() {
 

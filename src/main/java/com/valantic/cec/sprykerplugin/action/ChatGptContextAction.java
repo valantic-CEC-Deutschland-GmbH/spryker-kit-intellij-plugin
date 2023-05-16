@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.valantic.cec.sprykerplugin.icons.ValanticIcons;
 import com.valantic.cec.sprykerplugin.model.Context;
 import com.valantic.cec.sprykerplugin.model.chatgpt.ChatGptPromptInterface;
-import com.valantic.cec.sprykerplugin.services.ChatGptExecuter;
 import com.valantic.cec.sprykerplugin.services.ChatGptExecuterInterface;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +13,7 @@ public class ChatGptContextAction extends AnAction {
     private final Context context;
 
     public ChatGptContextAction(ChatGptPromptInterface prompt, Context context) {
-        super(prompt.getPromptType() == null ? "ChatGpt Action" : prompt.getPromptType(), prompt.getPromptType() == null ? "ChatGpt action" : prompt.getPromptType(), ValanticIcons.folderIcon);
+        super(prompt.getIntentionText() == null ? "ChatGpt Action" : prompt.getIntentionText(), prompt.getIntentionText() == null ? "ChatGpt action" : prompt.getIntentionText(), ValanticIcons.folderIcon);
         this.prompt = prompt;
         this.context = context;
     }

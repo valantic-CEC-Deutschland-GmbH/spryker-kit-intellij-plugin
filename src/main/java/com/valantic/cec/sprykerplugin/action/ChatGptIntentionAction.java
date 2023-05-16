@@ -54,7 +54,7 @@ public class ChatGptIntentionAction extends PsiElementBaseIntentionAction {
         }
     }
 
-    private ChatGptPromptInterface getMatchingPrompt(ArrayList<ChatGptPromptInterface> prompts, Context context) {
+    private ChatGptPromptInterface getMatchingPrompt(ArrayList<ChatGptPrompt> prompts, Context context) {
         for (ChatGptPromptInterface prompt : prompts) {
             Context necessaryContext = context.getProject()
                 .getService(ContextBuilderInterface.class)
@@ -95,7 +95,7 @@ public class ChatGptIntentionAction extends PsiElementBaseIntentionAction {
         return false;
     }
 
-    private boolean hasPromptForContext(ArrayList<ChatGptPromptInterface> prompts, Context context) {
+    private boolean hasPromptForContext(ArrayList<ChatGptPrompt> prompts, Context context) {
         for (ChatGptPromptInterface prompt : prompts) {
             Context necessaryContext = context.getProject()
                 .getService(ContextBuilderInterface.class)

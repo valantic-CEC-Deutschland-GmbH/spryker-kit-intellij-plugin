@@ -92,10 +92,10 @@ public class ProjectSettingsComponent {
         for (int i = 0; i < numPrompts; i++) {
             prompts.add(
                 new ChatGptPrompt(
-                    promptsTableModel.getValueAt(i, 0).toString(),
-                    promptsTableModel.getValueAt(i, 1).toString(),
-                    promptsTableModel.getValueAt(i, 2).toString(),
-                    promptsTableModel.getValueAt(i, 3).toString()
+                    (promptsTableModel.getValueAt(i, 0) != null)? promptsTableModel.getValueAt(i, 0).toString() : "",
+                    (promptsTableModel.getValueAt(i, 1) != null)? promptsTableModel.getValueAt(i, 1).toString() : "",
+                    (promptsTableModel.getValueAt(i, 2) != null)? promptsTableModel.getValueAt(i, 2).toString() : "",
+                    (promptsTableModel.getValueAt(i, 3) != null)? promptsTableModel.getValueAt(i, 3).toString() : ""
                 )
             );
         }

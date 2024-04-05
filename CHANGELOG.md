@@ -1,9 +1,14 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.12]
+- bugfix missing use statement in dependencyProviders
+- added executer boilerplate
+- added runner boilerplate
+
 ## [1.0.11]
 - replaced deprecated API calls
-  - PhpPsiUtil.getParentByCondition
+    - PhpPsiUtil.getParentByCondition
 - fixed ArrayOutOfBoundsException in SprykerModuleAction
 
 ## [1.0.10]

@@ -8,7 +8,7 @@
       {"type":"file","name":"Config.php.twig"},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"file","name":"Factory.php.twig"}
-  ]},
+    ]},
     {"type":"file","name":"codeception.yml.twig"},
     {"type":"file","name":"composer.json.twig"},
     {"type":"file","name":"CONTRIBUTING.md.twig"},
@@ -19,7 +19,7 @@
       {"type":"file","name":"Config.php.twig"},
       {"type":"directory","name":"Controller","contents":[
         {"type":"file","name":"Controller.php.twig"}
-    ]},
+      ]},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"file","name":"Factory.php.twig"},
       {"type":"directory","name":"Plugin","contents":[
@@ -33,12 +33,12 @@
           {"type":"file","name":"ResourceRelationshipPlugin.php.twig"},
           {"type":"file","name":"RestRequestValidatorPlugin.php.twig"},
           {"type":"file","name":"ValidateHttpRequestPlugin.php.twig"}
-      ]}
-    ]},
+        ]}
+      ]},
       {"type":"directory","name":"Validation","contents":[
         {"type":"file","name":"Validation.yml.twig"}
-    ]}
-  ]},
+      ]}
+    ]},
     {"type":"file","name":"LICENSE.twig"},
     {"type":"file","name":"phpstan.neon.twig"},
     {"type":"file","name":"README.md.twig"},
@@ -49,81 +49,89 @@
       {"type":"file","name":"ServiceFactory.php.twig"},
       {"type":"file","name":"ServiceInterface.php.twig"},
       {"type":"file","name":"Service.php.twig"}
-  ]},
+    ]},
     {"type":"directory","name":"Shared","contents":[
       {"type":"file","name":"Constants.php.twig"},
       {"type":"directory","name":"Transfer","contents":[
         {"type":"file","name":"transfer.xml.twig"}
-    ]}
-  ]},
+      ]}
+    ]},
     {"type":"file","name":"tooling.yml.twig"},
     {"type":"directory","name":"Yves","contents":[
       {"type":"file","name":"Config.php.twig"},
       {"type":"directory","name":"Controller","contents":[
         {"type":"file","name":"Controller.php.twig"}
-    ]},
+      ]},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"file","name":"Factory.php.twig"},
       {"type":"directory","name":"Plugin","contents":[
         {"type":"directory","name":"Router","contents":[
           {"type":"file","name":"RouteProviderPlugin.php.twig"}
-      ]}
-    ]},
+        ]}
+      ]},
       {"type":"directory","name":"Theme","contents":[
         {"type":"file","name":"ViewTwig.twig"},
         {"type":"file","name":"WidgetViewTwig.twig"}
-    ]},
+      ]},
       {"type":"directory","name":"Widget","contents":[
         {"type":"file","name":"Widget.php.twig"}
-    ]}
-  ]},
+      ]}
+    ]},
     {"type":"directory","name":"Zed","contents":[
       {"type":"directory","name":"Business","contents":[
         {"type":"file","name":"BusinessFactory.php.twig"},
         {"type":"directory","name":"Exception","contents":[
           {"type":"file","name":"$CustomException.php.twig"}
-      ]},
+        ]},
+        {"type":"directory","name":"Executor","contents":[
+          {"type":"file","name":"$ExecutorInterface.php.twig"},
+          {"type":"file","name":"$Executor.php.twig"}
+        ]},
         {"type":"file","name":"FacadeInterface.php.twig"},
         {"type":"file","name":"Facade.php.twig"},
         {"type":"directory","name":"Mapper","contents":[
           {"type":"file","name":"MapperInterface.php.twig"},
           {"type":"file","name":"Mapper.php.twig"}
-      ]},
+        ]},
         {"type":"directory","name":"Model","contents":[
           {"type":"file","name":"$CustomBusinessModelInterface.php.twig"},
           {"type":"file","name":"$CustomBusinessModel.php.twig"}
-      ]},
+        ]},
         {"type":"directory","name":"Reader","contents":[
           {"type":"file","name":"ReaderInterface.php.twig"},
           {"type":"file","name":"Reader.php.twig"}
-      ]},
+        ]},
+        {"type":"directory","name":"Runner","contents":[
+          {"type":"file","name":"$RunnerInterface.php.twig"},
+          {"type":"file","name":"$Runner.php.twig"}
+        ]},
         {"type":"directory","name":"Writer","contents":[
           {"type":"file","name":"WriterInterface.php.twig"},
           {"type":"file","name":"Writer.php.twig"}
-      ]}
-    ]},
+        ]}
+      ]},
       {"type":"directory","name":"Communication","contents":[
         {"type":"file","name":"CommunicationFactory.php.twig"},
         {"type":"directory","name":"Console","contents":[
           {"type":"file","name":"Console.php.twig"}
-      ]},
+        ]},
         {"type":"directory","name":"Controller","contents":[
           {"type":"file","name":"$EditController.php.twig"},
           {"type":"file","name":"$GatewayController.php.twig"},
           {"type":"file","name":"$IndexController.php.twig"},
           {"type":"file","name":"$ViewController.php.twig"}
-      ]},
+        ]},
         {"type":"file","name":"navigation.xml.twig"},
         {"type":"directory","name":"Plugin","contents":[
           {"type":"directory","name":"Command","contents":[
             {"type":"file","name":"CommandPlugin.php.twig"}
-        ]},
+          ]},
           {"type":"directory","name":"Queue","contents":[
             {"type":"file","name":"QueueMessageProcessorPlugin.php.twig"},
             {"type":"file","name":"QueueMessageRetryProcessorPlugin.php.twig"}
+          ]}
         ]}
-      ]}
-    ]},
+      ]},
       {"type":"file","name":"Config.php.twig"},
       {"type":"file","name":"DependencyProvider.php.twig"},
       {"type":"directory","name":"Persistence","contents":[
@@ -132,21 +140,21 @@
         {"type":"directory","name":"Mapper","contents":[
           {"type":"file","name":"MapperInterface.php.twig"},
           {"type":"file","name":"Mapper.php.twig"}
-      ]},
+        ]},
         {"type":"file","name":"PersistenceFactory.php.twig"},
         {"type":"directory","name":"Propel","contents":[
           {"type":"directory","name":"Schema","contents":[
             {"type":"file","name":"schema.xml.twig"}
-        ]}
-      ]},
+          ]}
+        ]},
         {"type":"file","name":"RepositoryInterface.php.twig"},
         {"type":"file","name":"Repository.php.twig"}
-    ]},
+      ]},
       {"type":"directory","name":"Presentation","contents":[
         {"type":"file","name":"index.twig"}
+      ]}
     ]}
   ]}
-  ]}
 ,
-  {"type":"report","directories":33,"files":80}
+  {"type":"report","directories":36,"files":84}
 ]

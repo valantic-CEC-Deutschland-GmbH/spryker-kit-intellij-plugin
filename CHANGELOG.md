@@ -8,7 +8,7 @@
 
 ## [1.0.11]
 - replaced deprecated API calls
-    - PhpPsiUtil.getParentByCondition
+- PhpPsiUtil.getParentByCondition
 - fixed ArrayOutOfBoundsException in SprykerModuleAction
 
 ## [1.0.10]

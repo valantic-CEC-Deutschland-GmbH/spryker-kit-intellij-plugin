@@ -70,8 +70,14 @@
         ]}
       ]},
       {"type":"directory","name":"Theme","contents":[
-        {"type":"file","name":"ViewTwig.twig"},
-        {"type":"file","name":"WidgetViewTwig.twig"}
+        {"type":"directory","name":"default","contents":[
+          {"type":"directory","name":"shop-ui","contents":[
+            {"type":"file","name":"widget-view.twig"}
+          ]},
+          {"type":"directory","name":"views","contents":[
+            {"type":"file","name":"Index.twig"}
+          ]}
+        ]}
       ]},
       {"type":"directory","name":"Widget","contents":[
         {"type":"file","name":"Widget.php.twig"}
@@ -156,5 +162,5 @@
     ]}
   ]}
 ,
-  {"type":"report","directories":36,"files":84}
+  {"type":"report","directories":39,"files":84}
 ]

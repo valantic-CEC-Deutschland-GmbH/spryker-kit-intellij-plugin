@@ -1,6 +1,9 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.13]
+- updated yves templates
+
 ## [1.0.12]
 - bugfix missing use statement in dependencyProviders
 - added executer boilerplate

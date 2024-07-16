@@ -5,10 +5,41 @@ declare(strict_types = 1);
 namespace {{ organization }}\Yves\{{ module }}\Controller;
 
 use Spryker\Yves\Kernel\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @method \{{ organization }}\Yves\{{ module }}\{{ module }}Factory getFactory()
  */
 class {{ controller }}Controller extends AbstractController
 {
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Spryker\Yves\Kernel\View\View|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function indexAction(Request $request)
+    {
+        return $this->view(
+            [
+                'message' => 'yves action',
+            ],
+            [],
+            '@{{ module }}/views/index.twig',
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function apiAction(Request $request): Response
+    {
+        return $this->jsonResponse(
+            [
+                'message' => 'yves action',
+            ],
+        );
+    }
 }

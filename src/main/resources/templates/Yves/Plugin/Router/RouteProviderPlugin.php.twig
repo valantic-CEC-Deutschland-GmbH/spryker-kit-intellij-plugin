@@ -10,17 +10,33 @@ use Spryker\Yves\Router\Route\RouteCollection;
 class {{ module }}RouteProviderPlugin extends AbstractRouteProviderPlugin
 {
     /**
-     * Specification:
-     * - Adds Routes to the RouteCollection.
-     *
-     * @api
-     *
+     * @var string
+     */
+    public const ROUTE_NAME = '{{ module }}';
+
+    /**
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
+        $routeCollection = $this->addIndexRoute($routeCollection);
+
+        return $routeCollection;
+    }
+
+
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    protected function addIndexRoute(RouteCollection $routeCollection): RouteCollection
+    {
+        $route = $this->buildRoute('/{{ module | lcfirst }}', '{{ module }}', '{{ controller }}', 'indexAction');
+        $routeCollection->add(static::ROUTE_NAME, $route);
+
         return $routeCollection;
     }
 }

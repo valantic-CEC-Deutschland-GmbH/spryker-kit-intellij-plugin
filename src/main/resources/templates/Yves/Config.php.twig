@@ -5,7 +5,15 @@ declare(strict_types = 1);
 namespace {{ organization }}\Yves\{{ module }};
 
 use Spryker\Yves\Kernel\AbstractBundleConfig;
+use {{ organization }}\Shared\{{ module }}\{{ module }}Constants;
 
 class {{ module }}Config extends AbstractBundleConfig
 {
+    /**
+     * @return array
+     */
+    public function getTestConfigValue(): array
+    {
+        return $this->get({{ module }}Constants::EXAMPLE_QUEUE_CHUNK_SIZE, []);
+    }
 }

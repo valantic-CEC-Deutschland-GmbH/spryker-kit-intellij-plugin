@@ -11,4 +11,11 @@ use Spryker\Yves\Kernel\AbstractFactory;
  */
 class {{ module }}Factory extends AbstractFactory
 {
+    /**
+     * @return \Spryker\Client\Customer\CustomerClientInterface
+     */
+    public function getCustomerClient(): CustomerClientInterface
+    {
+        return $this->getProvidedDependency(MerchantWidgetDependencyProvider::CLIENT_CUSTOMER);
+    }
 }

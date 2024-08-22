@@ -1,6 +1,9 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.14]
+- fix console template
+
 ## [1.0.13]
 - updated yves templates
 

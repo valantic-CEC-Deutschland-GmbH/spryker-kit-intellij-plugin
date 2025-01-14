@@ -105,7 +105,7 @@ jobs:
 
       - uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 8.0.2
+          gradle-version: 8.10.2
 
       - name: run linter
         run: ./gradlew check

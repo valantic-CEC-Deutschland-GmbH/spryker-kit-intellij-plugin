@@ -75,7 +75,7 @@
             {"type":"file","name":"widget-view.twig"}
           ]},
           {"type":"directory","name":"views","contents":[
-            {"type":"file","name":"Index.twig"}
+            {"type":"file","name":"index.twig"}
           ]}
         ]}
       ]},
@@ -132,6 +132,7 @@
           {"type":"directory","name":"Command","contents":[
             {"type":"file","name":"CommandPlugin.php.twig"}
           ]},
+          {"type":"file","name":"Plugin.php.twig"},
           {"type":"directory","name":"Queue","contents":[
             {"type":"file","name":"QueueMessageProcessorPlugin.php.twig"},
             {"type":"file","name":"QueueMessageRetryProcessorPlugin.php.twig"}
@@ -162,5 +163,5 @@
     ]}
   ]}
 ,
-  {"type":"report","directories":39,"files":84}
+  {"type":"report","directories":39,"files":85}
 ]

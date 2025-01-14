@@ -32,10 +32,4 @@ public class SprykerDynamicActionGroup extends ActionGroup {
 
         return children;
     }
-
-
-    @Override
-    public void update(AnActionEvent e) {
-        e.getPresentation().setEnabledAndVisible(true);
-    }
 }

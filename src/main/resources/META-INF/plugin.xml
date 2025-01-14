@@ -40,7 +40,8 @@
 
     <actions>
         <group id="org.intellij.sdk.action.DynamicActionGroup"
-               text="SprykerKit" popup="true"
+               text="SprykerKit"
+               popup="true"
                class="com.valantic.cec.sprykerplugin.action.newGroup.SprykerDynamicActionGroup"
                 icon="com.valantic.cec.sprykerplugin.icons.ValanticIcons.Sdk_default_icon" >
             <add-to-group group-id="NewGroup" />

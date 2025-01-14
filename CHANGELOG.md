@@ -1,6 +1,9 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # intellij_spryker_plugin Changelog
+## [1.0.16]
+- Compatibility update + fixed a deprecation
+
 ## [1.0.15]
 - added a plugin template to zed communication root
 

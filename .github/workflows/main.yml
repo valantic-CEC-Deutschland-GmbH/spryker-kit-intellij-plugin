@@ -143,4 +143,4 @@ jobs:
           gradle-version: 8.10.2
 
       - name: run PluginVerifier
-        run: ./gradlew runPluginVerifier
+        run: ./gradlew verifyPlugin

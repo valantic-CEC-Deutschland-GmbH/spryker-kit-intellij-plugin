@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 public class TextParser {
 
-    private static final String START_CLASS_NAME = "//start-class-name:";
-    private static final String END_CLASS_NAME = "//end-class-name";
-    private static final String START_SOURCE_CODE = "//start-source-code:";
-    private static final String END_SOURCE_CODE = "//end-source-code";
+    private static final String START_CLASS_NAME = "\\[start-class-name\\]";
+    private static final String END_CLASS_NAME = "\\[end-class-name\\]";
+    private static final String START_SOURCE_CODE = "\\[start-source-code\\]";
+    private static final String END_SOURCE_CODE = "\\[end-source-code\\]";
 
     public static List<String> getClassNames(String text) {
         List<String> classNames = new ArrayList<>();
